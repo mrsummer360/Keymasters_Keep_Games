@@ -1,2 +1,106 @@
 # Keymasters_Keep_Games
-mrsummer360's game implementations for Keymaster's Keep
+mrsummer360's game implementations for [Keymaster's Keep](https://github.com/SerpentAI/Archipelago/releases?q=keymaster%27s+keep), a game mode for [Archipelago Multiworld](https://www.archipelago.gg)
+
+## Installation
+
+1. [Install Archipelago](https://archipelago.gg/tutorial/Archipelago/setup_en).
+2. Add the [Keymaster's Keep `.apworld` file](https://github.com/silasary/Archipelago/releases?q=keymaster%27s&expanded=true) into Archipelago's `worlds/` folder.
+3. Run the Archipelago Launcher. A new `keymasters_keep/` folder will be created.
+4. Download the `.py` files in [this repository's `keymasters_keep/` folder](https://github.com/jack5github/Jack5-Keymasters-Keep/tree/main/keymasters_keep) for the games you wish to add to the game pool, and place them into the `keymasters_keep/` folder.
+5. Restart the Archipelago Launcher and open 'Generate Template Options'. The `Players/Templates/Keymaster's Keep.yaml` file will now contain the customisable settings for each implementation installed.
+
+## KMK Codex Entries
+### No Man's Sky
+Version 1.0
+The implementation includes various challenges across all areas of the gameplay. They are divided into categories, that can be individually activated and configured with minimum and maximum boundaries. 
+For more background on some of the goals (like interactions with certain animal categories or portal sequences) see [No Man's Sky wiki](https://nomanssky.fandom.com/wiki/Product)
+
+#### Categories
+1. Scanning
+    - Scan QUANTITY SCANTYPE
+    - Visit QUANTITY planets and scan at least one SCANTYPE
+    - Scan all Wildlife on QUANTITY planets
+2. Elements
+    - Gather or Synthesize QUANTITY ELEMENT
+3. Languages
+    - Learn QUANTITY words in any language
+    - Learn QUANTITY words of LANGUAGE (common languages)
+    - Learn QUANTITY words of LANGUAGE (special languages like Atlas)
+4. Upgrades
+    - Install a UPGRADECLASS UPGRADETYPE upgrade
+    - Upgrade your UPGRADETYPE inventory QUANTITY times
+    - Install a Survey Device in any Multitool
+    - Get QUANTITY BLUEPRINTTYPE Blueprints
+    - Learn QUANTITY Blueprints of any kind
+5. Animals
+    - Tame QUANTITY different animal species
+    - Breed QUANTITY eggs
+    - ACTION QUANTITY ANIMALTYPE
+    - Collect QUANTITY of animal dung from any animal
+6. Freighters
+    - Recruit a UPGRADECLASS Freighter Flagship
+    - Fully explore (all rooms and goals) a derelict freighter
+    - Discover and loot a crashed freighter
+    - Discover and loot a crashed freighter under water
+    - Recruit QUANTITY frigates of any type
+    - Recruit QUANTITY TYPE frigates
+7. Exploration
+    - Visit QUANTITY different systems
+    - Visit a TYPE star system
+    - Discover an interstellar anomaly
+    - Fly through a black hole
+    - Meet an abysmal horror in space
+    - Travel through a portal to LOCATION (specific locations can be deactivated, see wiki for portal glyph nomination)
+    - Land on a TYPE planet
+8. Vehicles
+    - Get an Exo-Vehicle
+    - Get a TYPE Exo-Vehicle
+9. Bases
+    - Build a base teleporter
+    - Build or extend a TYPE base with at least QUANTITY base parts
+    - Unlock QUANTITY base blueprints
+    - Build a working Energy Extractor
+    - Build a working Gas Extractor
+    - Build a working Mineral Extractor
+10. Junk
+    - Gather or Synthesize QUANTITY ELEMENT (junk only)
+11. Landmarks
+    - Visit a TYPE on any planet
+12. Combat
+    - Kill at least QUANTITY of TYPE
+    - Save a Freighter from Pirates
+    - Destroy a pirate Dreadnaught
+    - Raid a freighter
+    - Kill QUANTITY creatures and/or security bots on derelict freighters
+13. Artifacts
+    - Gather QUANTITY RARITY TYPE
+    - Obtain a RARITY ancient skeleton
+14. Harvesting
+    - Harvest QUANTITY TYPE (Regular crops)
+    - Harvest QUANTITY TYPE (Special plants like Nipnip or Gravitino Balls)
+15. Special
+    - Harvest QUANTITY TYPE (special elements like Hexite)
+16. Missions
+    - Complete QUANTITY missions for the FACTION
+    - Complete QUANTITY TYPE missions
+17. Quests
+    - Complete the quest line TYPE 
+18. Galaxy Center
+    - Reach the center of the galaxy without deliberately teleporting close to it
+19. Fishing
+    - Catch at least QUANTITY SIZE TYPE
+    - Fish up at least QUANTITY flotsam
+20. Cooking
+    - Cook TYPE
+21. Settlement
+    - Become Overseer of a Settlement
+    - Clear your Settlement's debt
+    - Make a settlement decision
+    - Build a TYPE in your settlement
+    - Upgrade a TYPE in your settlement to RANK
+22. Corvette
+    - Build a corvette
+    - Build a RANK corvette
+23. Crafting
+    - Craft all Atlas Passes
+    - Craft a fusion ignitor
