@@ -11,7 +11,7 @@ mrsummer360's game implementations for [Keymaster's Keep](https://github.com/Ser
 
 ## KMK Codex Entries
 ### No Man's Sky
-Version 1.0
+Version 1.0  
 The implementation includes various challenges across all areas of the gameplay. They are divided into categories, that can be individually activated and configured with minimum and maximum boundaries. 
 For more background on some of the goals (like interactions with certain animal categories or portal sequences) see [No Man's Sky wiki](https://nomanssky.fandom.com/wiki/Product)
 
