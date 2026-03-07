@@ -12,6 +12,7 @@ mrsummer360's game implementations for [Keymaster's Keep](https://github.com/Ser
 ## KMK Codex Entries
 ### No Man's Sky
 __Version:__ 1.0
+__Download:__ [LINK](https://github.com/mrsummer360/Keymasters_Keep_Games/blob/main/nms.py)
 __Description:__
 No Man's Sky is a vast science fiction survival and exploration game set in a procedurally generated universe containing over 18 quintillion unique planets. Players take on the role of a space explorer, hopping between worlds to gather resources, upgrade their ship and equipment, uncover ancient alien lore, and gradually unravel the mysteries at the heart of the cosmos. Each planet offers its own distinct ecosystem, creatures, and hazards, ensuring no two worlds feel quite alike. The game supports both solo and multiplayer experiences, and has evolved dramatically since its 2016 launch — with Hello Games continuously releasing free updates that have added base building, underwater exploration, living ships, and much more.
 
@@ -111,6 +112,7 @@ For more background on some of the goals (like interactions with certain animal 
 
 ### Spoonacular
 __Version:__ 1.0
+__Download:__ [LINK](https://github.com/mrsummer360/Keymasters_Keep_Games/blob/main/spoonacular.py)
 __Description:__ 
 The Spoonacular API is a comprehensive food and recipe data platform that gives developers access to an extensive database of recipes, ingredients, nutritional information, and meal planning tools. It enables applications to search and filter recipes by cuisine, diet, allergens, and available ingredients, as well as retrieve detailed nutritional breakdowns, wine pairings, and even grocery product data. Whether you're building a meal planner, a fitness tracker, or a cooking app, Spoonacular provides the data infrastructure to power rich, food-focused experiences with minimal effort.
 
