@@ -12,7 +12,9 @@ mrsummer360's game implementations for [Keymaster's Keep](https://github.com/Ser
 ## KMK Codex Entries
 ### No Man's Sky
 __Version:__ 1.0  
+
 __Download:__ [LINK](https://github.com/mrsummer360/Keymasters_Keep_Games/blob/main/nms.py)  
+
 __Description:__  
 No Man's Sky is a vast science fiction survival and exploration game set in a procedurally generated universe containing over 18 quintillion unique planets. Players take on the role of a space explorer, hopping between worlds to gather resources, upgrade their ship and equipment, uncover ancient alien lore, and gradually unravel the mysteries at the heart of the cosmos. Each planet offers its own distinct ecosystem, creatures, and hazards, ensuring no two worlds feel quite alike. The game supports both solo and multiplayer experiences, and has evolved dramatically since its 2016 launch — with Hello Games continuously releasing free updates that have added base building, underwater exploration, living ships, and much more.
 
@@ -128,6 +130,9 @@ RECIPE is split into recipe name and a link to the recipe itself.
 
 ### Two Point Campus
 __Version:__ 1.0
+
+__Download:__ [LINK](https://github.com/mrsummer360/Keymasters_Keep_Games/blob/main/twopointcampus.py)
+
 __Description:__
 Two Point Campus is a management and simulation game about building and running your own university. Players design campuses, construct and upgrade rooms, hire and train staff, and offer a wide range of courses (from Wizardry and Spy School to Robotics and Gastronomy) to attract and educate students. Success is measured through Prestige, reputation, and star ratings as campuses grow from modest single-course schools into sprawling, fully-equipped institutions. Three expansions, Space Academy, School Spirits, and Medical School, add their own courses, skills, and mechanics on top of the base game. The game supports both a structured Career mode and a fully customizable Sandbox mode, where starting funds, disasters, invasions, and other conditions can all be tuned by the player.
 __KMK Implementation:__
@@ -137,22 +142,22 @@ The configuration also allows deactivation of DLC content by pack.
 
 #### Objectives
 1. Staff Objectives
- - Train a staff member to LEVEL in SKILL (DLC Skills are added if the pack is activated)
- - Hire a specific staff member
+   - Train a staff member to LEVEL in SKILL (DLC Skills are added if the pack is activated)
+   - Hire a specific staff member
 2. Level and Prestige (Some level goals are separate and marked as Time Consuming / Difficult)
- - Reach LEVEL Prestige in ROOMTYPE (DLC Rooms are added if the pack is activated)
- - Reach LEVEL Campus Level (any map)
- - Reach LEVEL Campus Level on MAP (DLC Campuses are added if the pack is activated)
- - Level up COURSE to LEVEL (DLC Courses are added, if the pack is activated)
+   - Reach LEVEL Prestige in ROOMTYPE (DLC Rooms are added if the pack is activated)
+   - Reach LEVEL Campus Level (any map)
+   - Reach LEVEL Campus Level on MAP (DLC Campuses are added if the pack is activated)
+   - Level up COURSE to LEVEL (DLC Courses are added, if the pack is activated)
 3. Events
- - Win COMPETITION (Space Battle is added, if Space Academy DLC is activated)
- - Catch all intruders during an invasion
+   - Win COMPETITION (Space Battle is added, if Space Academy DLC is activated)
+   - Catch all intruders during an invasion
 4. Finances
- - Have more than AMOUNT money
+   - Have more than AMOUNT money
 5. Sandbox Progress (Can be separately enabled in the YAML)
- - Get STARS on MAP with GOAL (DLC campuses are added, if the pack is activated, 3 Stars is considered Time Consuming)
+   - Get STARS on MAP with GOAL (DLC campuses are added, if the pack is activated, 3 Stars is considered Time Consuming)
 6. Challenges (Can be separately enabled in the YAML)
- - Get a MEDAL Medal in CHALLENGE (Gradeyard Shift is added, if School Spirit DLC is activated)
+   - Get a MEDAL Medal in CHALLENGE (Gradeyard Shift is added, if School Spirit DLC is activated)
 
 #### Optional Challenges
 The Optional Challenges are currently revolving around playing in Sandbox mode, and are therefore only available if the Sandbox mode is activated in the YAML.
