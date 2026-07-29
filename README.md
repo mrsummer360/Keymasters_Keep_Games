@@ -19,7 +19,7 @@ __KMK Implementation:__
 The implementation includes various challenges across all areas of the gameplay. They are divided into categories, that can be individually activated and configured with minimum and maximum boundaries. 
 For more background on some of the goals (like interactions with certain animal categories or portal sequences) see [No Man's Sky wiki](https://nomanssky.fandom.com/wiki/Product)
 
-#### Categories
+#### Objectives
 1. Scanning
     - Scan QUANTITY SCANTYPE
     - Visit QUANTITY planets and scan at least one SCANTYPE
@@ -117,8 +117,51 @@ The Spoonacular API is a comprehensive food and recipe data platform that gives 
 __KMK Implementation:__
 This implementation uses the random_recipe API to fetch random recipes which should be cooked in order to fulfill the objective. The API call supports basic caching to limit API credit usage, the calls can be made with included and excluded tags. 
 
-### Objectives
+#### Objectives
 Cook RECIPE
 Cook anything or set API key and try again (is generated when invalid or no API key is set)
 
 RECIPE is split into recipe name and a link to the recipe itself.
+
+
+### Two Point Campus
+__Version:__ 1.0
+__Description:__
+Two Point Campus is a management and simulation game about building and running your own university. Players design campuses, construct and upgrade rooms, hire and train staff, and offer a wide range of courses (from Wizardry and Spy School to Robotics and Gastronomy) to attract and educate students. Success is measured through Prestige, reputation, and star ratings as campuses grow from modest single-course schools into sprawling, fully-equipped institutions. Three expansions, Space Academy, School Spirits, and Medical School, add their own courses, skills, and mechanics on top of the base game. The game supports both a structured Career mode and a fully customizable Sandbox mode, where starting funds, disasters, invasions, and other conditions can all be tuned by the player.
+__KMK Implementation:__
+The implementation covers staff training, room and campus progression, course leveling, competitions, finances, and sandbox/challenge-specific goals. Objectives are split so the base game and each DLC can be individually included or excluded, and skill/room/course pools are weighted so that shorter DLC lists aren't drowned out by the much larger base game list. Some objective ranges are further split into Standard, Time Consuming, and Difficult bands based on how much of a system's cap they demand. Sandbox goals can additionally be paired with a set of Additional Optional Challenges drawn from the game's own Sandbox customization settings (disasters, invasions, starting funds, income multiplier, temperature, and more)
+The Objectives are optimized for play in a Sandbox setting, but all goals should be generic enough to be achieved in any game mode. Challenge mode and Sandbox specific goals and constraints can be deactivated through the configuration. 
+The configuration also allows deactivation of DLC content by pack.
+
+#### Objectives
+1. Staff Objectives
+ - Train a staff member to LEVEL in SKILL (DLC Skills are added if the pack is activated)
+ - Hire a specific staff member
+2. Level and Prestige (Some level goals are separate and marked as Time Consuming / Difficult)
+ - Reach LEVEL Prestige in ROOMTYPE (DLC Rooms are added if the pack is activated)
+ - Reach LEVEL Campus Level (any map)
+ - Reach LEVEL Campus Level on MAP (DLC Campuses are added if the pack is activated)
+ - Level up COURSE to LEVEL (DLC Courses are added, if the pack is activated)
+3. Events
+ - Win COMPETITION (Space Battle is added, if Space Academy DLC is activated)
+ - Catch all intruders during an invasion
+4. Finances
+ - Have more than AMOUNT money
+5. Sandbox Progress (Can be separately enabled in the YAML)
+ - Get STARS on MAP with GOAL (DLC campuses are added, if the pack is activated, 3 Stars is considered Time Consuming)
+6. Challenges (Can be separately enabled in the YAML)
+ - Get a MEDAL Medal in CHALLENGE (Gradeyard Shift is added, if School Spirit DLC is activated)
+
+#### Optional Challenges
+The Optional Challenges are currently revolving around playing in Sandbox mode, and are therefore only available if the Sandbox mode is activated in the YAML.
+ - Disasters enabled
+ - Invaders enabled
+ - VIP Visits enabled / disabled
+ - Staff Requests enabled / disabled
+ - Start with CASH amount
+ - Start with KUDOSH amount
+ - Start with INCOME Income Multiplier
+ - Start with ALLOWANCE monthly allowance
+ - Start with Specific Temperature
+ - Start with CP Course Points
+ - Use a specific Sandbox mode Custom setting (includes all of the settings above)
