@@ -6,16 +6,17 @@ mrsummer360's game implementations for [Keymaster's Keep](https://github.com/Ser
 1. [Install Archipelago](https://archipelago.gg/tutorial/Archipelago/setup_en).
 2. Add the [Keymaster's Keep `.apworld` file](https://github.com/silasary/Archipelago/releases?q=keymaster%27s&expanded=true) into Archipelago's `worlds/` folder.
 3. Run the Archipelago Launcher. A new `keymasters_keep/` folder will be created.
-4. Download the `.py` files in [this repository's `keymasters_keep/` folder](https://github.com/jack5github/Jack5-Keymasters-Keep/tree/main/keymasters_keep) for the games you wish to add to the game pool, and place them into the `keymasters_keep/` folder.
+4. Download the `.py` files for the games you wish to add to the game pool, and place them into the `keymasters_keep/` folder.
 5. Restart the Archipelago Launcher and open 'Generate Template Options'. The `Players/Templates/Keymaster's Keep.yaml` file will now contain the customisable settings for each implementation installed.
 
 ## KMK Codex Entries
 ### No Man's Sky
-__Version:__ 1.0
-__Description:__
+__Version:__ 1.0  
+__Download:__ [LINK](https://github.com/mrsummer360/Keymasters_Keep_Games/blob/main/nms.py)  
+__Description:__  
 No Man's Sky is a vast science fiction survival and exploration game set in a procedurally generated universe containing over 18 quintillion unique planets. Players take on the role of a space explorer, hopping between worlds to gather resources, upgrade their ship and equipment, uncover ancient alien lore, and gradually unravel the mysteries at the heart of the cosmos. Each planet offers its own distinct ecosystem, creatures, and hazards, ensuring no two worlds feel quite alike. The game supports both solo and multiplayer experiences, and has evolved dramatically since its 2016 launch — with Hello Games continuously releasing free updates that have added base building, underwater exploration, living ships, and much more.
 
-__KMK Implementation:__
+__KMK Implementation:__  
 The implementation includes various challenges across all areas of the gameplay. They are divided into categories, that can be individually activated and configured with minimum and maximum boundaries. 
 For more background on some of the goals (like interactions with certain animal categories or portal sequences) see [No Man's Sky wiki](https://nomanssky.fandom.com/wiki/Product)
 
@@ -110,11 +111,12 @@ For more background on some of the goals (like interactions with certain animal 
     - Craft a fusion ignitor
 
 ### Spoonacular
-__Version:__ 1.0
-__Description:__ 
+__Version:__ 1.0  
+__Download:__ [LINK](https://github.com/mrsummer360/Keymasters_Keep_Games/blob/main/spoonacular.py)  
+__Description:__   
 The Spoonacular API is a comprehensive food and recipe data platform that gives developers access to an extensive database of recipes, ingredients, nutritional information, and meal planning tools. It enables applications to search and filter recipes by cuisine, diet, allergens, and available ingredients, as well as retrieve detailed nutritional breakdowns, wine pairings, and even grocery product data. Whether you're building a meal planner, a fitness tracker, or a cooking app, Spoonacular provides the data infrastructure to power rich, food-focused experiences with minimal effort.
 
-__KMK Implementation:__
+__KMK Implementation:__  
 This implementation uses the random_recipe API to fetch random recipes which should be cooked in order to fulfill the objective. The API call supports basic caching to limit API credit usage, the calls can be made with included and excluded tags. 
 
 #### Objectives
