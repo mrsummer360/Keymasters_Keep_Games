@@ -172,3 +172,51 @@ The Optional Challenges are currently revolving around playing in Sandbox mode, 
  - Start with Specific Temperature
  - Start with CP Course Points
  - Use a specific Sandbox mode Custom setting (includes all of the settings above)
+
+### Two Point Hospital
+__Version:__ 1.0
+
+__Download:__ [LINK](https://github.com/mrsummer360/Keymasters_Keep_Games/blob/main/twopointhospital.py)
+
+__Description:__
+Two Point Hospital is a management simulation game about building, expanding, and running a successful hospital. Players must design facilities, hire and train staff, cure a wide variety of illnesses, manage finances, and balance patient care with reputation and prestige. The base game is supported by several DLC packs that add new hospital maps, rooms, skills, and unique gameplay content. The game is often played in a Sandbox-style setup, where the player can tune many systems such as starting money, cash flow, disasters, epidemics, and hospital difficulty.
+
+__KMK Implementation:__
+The implementation is centered around generic hospital progression and sandbox challenge goals. It includes staff training targets, room and hospital level progression, prestige milestones, money thresholds, epidemic clearing, and custom sandbox goals that can be individually activated. The DLC packs can be toggled on or off independently, which alters the available skill, room, and hospital pools used in the generated objectives.
+
+#### Objectives
+1. Hospital Progression
+   - Get Hospital Level LEVEL
+   - Get Hospital Level LEVEL on MAP
+2. Staff Training
+   - Train a staff member to LEVEL in SKILL
+   - Train a staff member in SKILL
+3. Prestige and Rooms
+   - Reach Prestige Level LEVEL with ROOM
+4. Events and Finances
+   - Clear an Epidemic
+   - Have CASH amount
+5. Sandbox Progress (Can be separately enabled in the YAML)
+   - Get STARS Stars in MAP with GOAL
+   - Get 3 Stars in MAP with GOAL
+
+#### Optional Challenges
+The Optional Challenges are tied to Sandbox mode and are therefore only available if the Sandbox mode is activated in the YAML.
+ - Include Sandbox Mode Goals
+ - Include Bigfoot DLC
+ - Include Pebberley Island DLC
+ - Include Close Encounters DLC
+ - Include Off the Grid DLC
+ - Include Culture Shock DLC
+ - Include A Stitch in Time DLC
+ - Include Speedy Recovery DLC
+ - Disasters enabled
+ - Auto-Unlocks disabled
+ - Epidemics enabled
+ - VIP Visits enabled / disabled
+ - Staff Requests enabled / disabled
+ - Start with CASH amount
+ - Start with KUDOSH amount
+ - Start with INCOME income multiplier
+ - Start with Specific Temperature
+ - Use a specific Sandbox mode custom setting (includes all of the settings above)
