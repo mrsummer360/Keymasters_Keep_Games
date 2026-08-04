@@ -220,3 +220,29 @@ The Optional Challenges are tied to Sandbox mode and are therefore only availabl
  - Start with INCOME income multiplier
  - Start with Specific Temperature
  - Use a specific Sandbox mode custom setting (includes all of the settings above)
+
+### YouTube
+__Version:__ 1.0
+
+__Download:__ [LINK](https://github.com/mrsummer360/Keymasters_Keep_Games/blob/main/YouTube.py)
+
+__Description:__
+YouTube is a video-sharing platform that provides access to a massive catalog of user-generated and professionally produced content across music, gaming, documentaries, tutorials, news, and much more. The Keymaster's Keep implementation uses the YouTube Data API to generate objectives that direct the player to watch a random, duration-filtered video based on a configurable set of search terms.
+
+__KMK Implementation:__
+This implementation uses a YouTube Data API key to discover videos via keyword search, then filters them by duration range, channel name, and batch configuration. Keyword generation supports multiple sources: Custom, Recommended, Trending, and combinations of those sources. The implementation also includes per-batch keyword pool sampling, batching logic, and caching of generated video results to avoid repeated API calls when the same configuration is reused.
+
+#### Objectives
+1. Watch VIDEO
+   - Watch a randomly selected video from the generated YouTube search results
+   - If the API key is missing or the system cannot produce a valid result set, the generator falls back to a generic reminder objective
+
+#### Configuration Highlights
+- YouTube API Key
+- Keyword Mode (Custom, Recommended, Trending, or a combination)
+- Custom Keywords
+- Keyword Pool Size Per Batch
+- Number of Batches
+- Batch Size
+- Minimum and Maximum Video Length
+- Optional Channel Name filter
