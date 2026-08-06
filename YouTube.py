@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import random
 import re
 import time
@@ -103,6 +104,9 @@ class YouTubeOptions:
     youtube_min_length: YouTubeMinLength
     youtube_max_length: YouTubeMaxLength
     youtube_channel_name: YouTubeChannelName
+    youtube_keyword_dictionary_path: YouTubeKeywordDictionaryPath
+    youtube_region_code: YouTubeRegionCode
+    youtube_language: YouTubeLanguage
 
 # Main Class
 class YouTubeGame(Game):
@@ -123,16 +127,27 @@ class YouTubeGame(Game):
     def resolve_keywords(self) -> List[str]:
         custom_keywords = list(self.keywords or [])
         recommended_keywords = list(YOUTUBE_SEARCH_KEYWORD_POOL)
-        trending_keywords = get_trending_keywords()
 
         selected_sources = list(self.keyword_mode or [])
         if not selected_sources:
             selected_sources = ["Recommended"]
 
+        trending_keywords: List[str] = []
+        if "Trending" in selected_sources:
+            trending_keywords = get_trending_keywords(
+                region=self.region_code,
+                language=self.language,
+            )
+
+        dictionary_keywords: List[str] = []
+        if "Dictionary" in selected_sources:
+            dictionary_keywords = get_keyword_dictionary(self.keyword_dictionary_path)
+
         keyword_sources = {
             "Custom": custom_keywords,
             "Recommended": recommended_keywords,
             "Trending": trending_keywords,
+            "Dictionary": dictionary_keywords,
         }
 
         combined_keywords: List[str] = []
@@ -166,20 +181,25 @@ class YouTubeGame(Game):
                 return game_objective_templates
 
             print(
-                "[YouTube] generating video list... Keywords:",
-                keywords,
-                "; Keyword Pool Size Per Batch:",
-                self.keyword_pool_size_per_batch,
-                "; Number of Batches:",
-                self.number_of_batches,
-                "; Batch Size:",
-                self.batch_size,
-                "; Length Between",
-                self.min_length,
-                "and",
-                self.max_length,
-                "seconds; Channel:",
-                self.channel_name,
+                "[YouTube] generating video list... ",
+            #   "Keywords:",
+            #    keywords,
+            #    "; Keyword Pool Size Per Batch:",
+            #    self.keyword_pool_size_per_batch,
+            #    "; Number of Batches:",
+            #    self.number_of_batches,
+            #    "; Batch Size:",
+            #    self.batch_size,
+            #    "; Length Between",
+            #    self.min_length,
+            #    "and",
+            #    self.max_length,
+            #    "seconds; Channel:",
+            #    self.channel_name,
+            #    "; Region:",
+            #    self.region_code or "default",
+            #    "; Language:",
+            #    self.language or "default", 
             )
             holder = YouTubeVideoHolder(
                 api_key=self.api_key,
@@ -190,6 +210,8 @@ class YouTubeGame(Game):
                 min_length=self.min_length,
                 max_length=self.max_length,
                 channel_name=self.channel_name,
+                region_code=self.region_code,
+                language=self.language,
             )
             video_dict = holder.get_videos()
             print("[YouTube] Video list generated, moving on...")
@@ -258,6 +280,18 @@ class YouTubeGame(Game):
     def channel_name(self) -> str:
         return self.archipelago_options.youtube_channel_name.value
 
+    @property
+    def keyword_dictionary_path(self) -> str:
+        return self.archipelago_options.youtube_keyword_dictionary_path.value
+
+    @property
+    def region_code(self) -> str:
+        return self.archipelago_options.youtube_region_code.value
+
+    @property
+    def language(self) -> str:
+        return self.archipelago_options.youtube_language.value
+
 
 class YouTubeAPIKey(FreeText):
     """
@@ -272,20 +306,21 @@ class YouTubeKeywordMode(OptionSet):
     """
     Controls which keyword sources are used to build the video search pool.
     The selected values are combined into one keyword pool.
-    Allowed values: Custom, Recommended, Trending
+    Allowed values: Custom, Recommended, Trending, Dictionary
     """
     display_name = "Keyword Mode"
     valid_keys = [
         "Custom",
         "Recommended",
         "Trending",
+        "Dictionary",
     ]
     default = frozenset({"Recommended"})
 
 
 class YouTubeKeywords(OptionList):
     """
-    Search terms used to build the random video pool.
+    Search terms used to build the random video pool for the Custom setting.
     The selected values are combined into one YouTube search query.
     Leave empty to use a default set of keywords. 
     Example values: gaming, speedrun, documentary, cats
@@ -353,6 +388,91 @@ class YouTubeChannelName(FreeText):
     default = ""
 
 
+class YouTubeKeywordDictionaryPath(FreeText):
+    """
+    Optional absolute file path to a keyword dictionary.
+    The file must contain one keyword per line.
+    Example dictionary powered by 1000words.com is provided on GitHub
+    """
+    display_name = "YouTube Keyword Dictionary Path"
+    default = ""
+
+
+class YouTubeRegionCode(FreeText):
+    """
+    Optional region code for Google Trends and YouTube search requests.
+    Accepts a single value or a comma-separated list of region codes.
+    Examples: US, GB, DE, IN, BR.
+    """
+    display_name = "YouTube Region Code"
+    default = ""
+
+
+class YouTubeLanguage(FreeText):
+    """
+    Optional language preference for Google Trends and YouTube search requests.
+    Accepts a single value or a comma-separated list of language codes.
+    Examples: en, en-US, fr, es, de.
+    """
+    display_name = "YouTube Language"
+    default = ""
+
+
+def get_keyword_dictionary(keyword_file_path: str) -> List[str]:
+    if not keyword_file_path:
+        return []
+
+    dictionary_path = keyword_file_path.strip()
+    if not os.path.isabs(dictionary_path):
+        print("[YouTube] Keyword dictionary path must be an absolute file path.")
+        return []
+
+    if not os.path.exists(dictionary_path):
+        print(f"[YouTube] Keyword dictionary file not found: {dictionary_path}")
+        return []
+
+    try:
+        with open(dictionary_path, "r", encoding="utf-8") as handle:
+            keywords = [
+                line.strip()
+                for line in handle
+                if line.strip()
+            ]
+        if keywords:
+            print(f"[YouTube] Loaded {len(keywords)} keywords from dictionary file: {dictionary_path}")
+        return keywords
+    except OSError as exc:
+        print(f"[YouTube] Failed to read keyword dictionary file {dictionary_path}: {exc}")
+        return []
+
+
+def _split_multi_value(value: str) -> List[str]:
+    if not value:
+        return []
+    parts = re.split(r"[,;|\n]+", value)
+    return [part.strip() for part in parts if part and part.strip()]
+
+
+def _iter_preference_pairs(region: str = "", language: str = "") -> List[tuple[str, str]]:
+    region_values = _split_multi_value(region)
+    language_values = _split_multi_value(language)
+
+    if not region_values and not language_values:
+        return [("", "")]
+
+    pairs: List[tuple[str, str]] = []
+    if not region_values:
+        region_values = [""]
+    if not language_values:
+        language_values = [""]
+
+    for region_value in region_values:
+        normalized_region = region_value.strip().upper() if region_value else ""
+        for language_value in language_values:
+            pairs.append((normalized_region, language_value.strip()))
+    return pairs
+
+
 def _is_safe_trending_keyword(keyword: str) -> bool:
     banned_terms = {
         "election",
@@ -382,66 +502,92 @@ def _is_safe_trending_keyword(keyword: str) -> bool:
     return not any(term in lowered for term in banned_terms)
 
 
-def get_trending_keywords() -> List[str]:
+def get_trending_keywords(region: str = "", language: str = "") -> List[str]:
     headers = {"User-Agent": "Mozilla/5.0"}
-    print("[YouTube] Fetching trending keywords...")
-    try:
-        response = requests.get(
-            "https://trends.google.com/trends/api/dailytrends?geo=US&hl=en-US",
-            timeout=10,
-            headers=headers,
-        )
-        if response.status_code == 200:
-            text = response.text
-            if text.startswith(")]}'"):
-                text = text[4:]
+    all_keywords: List[str] = []
+    seen_keywords = set()
 
-            payload = json.loads(text)
-            keywords: List[str] = []
-            for entry in payload:
-                for trend_day in entry.get("trendingSearchesDays", []):
-                    for trend in trend_day.get("trendingSearches", []):
-                        if isinstance(trend.get("title"), dict):
-                            keyword = trend.get("title", {}).get("query")
-                        else:
-                            keyword = trend.get("title")
-                        if keyword and _is_safe_trending_keyword(keyword):
-                            keywords.append(keyword)
+    for region_code, language_code in _iter_preference_pairs(region, language):
+        query_params = {}
+        if region_code:
+            query_params["geo"] = region_code
+        if language_code:
+            query_params["hl"] = language_code
+
+        print(
+            f"[YouTube] Fetching trending keywords for region={region_code or 'default'} language={language_code or 'default'}..."
+        )
+        try:
+            # NOTE: The Google Trends JSON Daily Trends endpoint is not publicly
+            # available yet. Keep the code below as a commented reference until
+            # the official endpoint becomes accessible; RSS remains the active
+            # standard fallback for now.
+            # response = requests.get(
+            #     "https://trends.google.com/trends/api/dailytrends",
+            #     params=query_params,
+            #     timeout=10,
+            #     headers=headers,
+            # )
+            # if response.status_code == 200:
+            #     text = response.text
+            #     if text.startswith(")]}'"):
+            #         text = text[4:]
+            #
+            #     payload = json.loads(text)
+            #     keywords: List[str] = []
+            #     for entry in payload:
+            #         for trend_day in entry.get("trendingSearchesDays", []):
+            #             for trend in trend_day.get("trendingSearches", []):
+            #                 if isinstance(trend.get("title"), dict):
+            #                     keyword = trend.get("title", {}).get("query")
+            #                 else:
+            #                     keyword = trend.get("title")
+            #                 if keyword and _is_safe_trending_keyword(keyword) and keyword not in seen_keywords:
+            #                     keywords.append(keyword)
+            #                     seen_keywords.add(keyword)
+            #     if keywords:
+            #         all_keywords.extend(keywords)
+            #         print(f"[YouTube] Trending keywords found: {keywords}")
+            #         continue
+
+            rss_params = {}
+            if region_code:
+                rss_params["geo"] = region_code
+
+            rss_response = requests.get(
+                "https://trends.google.com/trending/rss",
+                params=rss_params,
+                timeout=10,
+                headers=headers,
+            )
+            if rss_response.status_code != 200:
+                print("[YouTube] Trending keyword search returned no usable keywords.")
+                continue
+
+            root = ET.fromstring(rss_response.content)
+            keywords = []
+            for item in root.findall(".//item"):
+                title = item.findtext("title")
+                if title and _is_safe_trending_keyword(title) and title not in seen_keywords:
+                    keywords.append(title)
+                    seen_keywords.add(title)
+
             if keywords:
-                print(f"[YouTube] Trending keywords found: {keywords}")
-                return keywords
+                all_keywords.extend(keywords)
+                print(f"[YouTube] Trending keywords found via RSS fallback: {keywords}")
+                continue
 
-        rss_response = requests.get(
-            "https://trends.google.com/trending/rss?geo=US",
-            timeout=10,
-            headers=headers,
-        )
-        if rss_response.status_code != 200:
             print("[YouTube] Trending keyword search returned no usable keywords.")
-            return []
+        except Exception:
+            print("[YouTube] Trending keyword search failed and returned no usable keywords.")
 
-        root = ET.fromstring(rss_response.content)
-        keywords = []
-        for item in root.findall(".//item"):
-            title = item.findtext("title")
-            if title and _is_safe_trending_keyword(title):
-                keywords.append(title)
-
-        if keywords:
-            print(f"[YouTube] Trending keywords found via RSS fallback: {keywords}")
-            return keywords
-
-        print("[YouTube] Trending keyword search returned no usable keywords.")
-        return []
-    except Exception:
-        print("[YouTube] Trending keyword search failed and returned no usable keywords.")
-        return []
+    return all_keywords
 
 
 class YouTubeVideoHolder:
     _video_cache: Dict[tuple, Dict[str, str]] = {}
 
-    def __init__(self, api_key, keywords, keyword_pool_size_per_batch, number_of_batches, batch_size, min_length, max_length, channel_name):
+    def __init__(self, api_key, keywords, keyword_pool_size_per_batch, number_of_batches, batch_size, min_length, max_length, channel_name, region_code=None, language=None):
         self.api_key = api_key
         self.keywords = keywords
         self.keyword_pool_size_per_batch = keyword_pool_size_per_batch
@@ -450,6 +596,8 @@ class YouTubeVideoHolder:
         self.min_length = min_length
         self.max_length = max_length
         self.channel_name = channel_name
+        self.region_code = (region_code or "").strip().upper()
+        self.language = (language or "").strip()
 
     def _request_with_retry(self, url: str, params: Dict[str, str], *, timeout: int = 20):
         max_retries = 5
@@ -512,6 +660,8 @@ class YouTubeVideoHolder:
             self.min_length,
             self.max_length,
             self.channel_name,
+            self.region_code,
+            self.language,
         )
 
         if self.number_of_batches > 0 and cache_key in YouTubeVideoHolder._video_cache:
@@ -522,73 +672,98 @@ class YouTubeVideoHolder:
         filtered_videos: Dict[str, str] = {}
         batch_count = self.number_of_batches if self.number_of_batches > 0 else 1
 
+        preference_pairs = _iter_preference_pairs(self.region_code, self.language)
+        max_keyword_pool_retries = max(3, min(10, len(self.keywords) or 1))
+
         for batch_index in range(batch_count):
-            batch_query_terms = self._sample_keywords()
-            if not batch_query_terms:
-                break
+            batch_success = False
+            for attempt_index in range(max_keyword_pool_retries):
+                batch_query_terms = self._sample_keywords()
+                if not batch_query_terms:
+                    break
 
-            print(
-                f"[YouTube] Batch {batch_index + 1} keyword pool: {batch_query_terms}"
-            )
-
-            if self.channel_name:
-                batch_query_terms.append(self.channel_name)
-
-            search_params = {
-                "part": "snippet",
-                "type": "video",
-                "maxResults": min(self.batch_size, 50),
-                "order": "relevance",
-                "safeSearch": "none",
-                "key": self.api_key,
-                "q": " ".join(batch_query_terms).strip(),
-            }
-
-            search_response = self._request_with_retry(
-                "https://www.googleapis.com/youtube/v3/search",
-                params=search_params,
-            )
-            if search_response.status_code != 200:
-                raise RuntimeError(
-                    f"[YouTube] YouTube search API returned {search_response.status_code}"
+                print(
+                    f"[YouTube] Batch {batch_index + 1} keyword pool attempt {attempt_index + 1}: {batch_query_terms}"
                 )
 
-            search_data = search_response.json()
-            video_ids = [
-                item["id"]["videoId"]
-                for item in search_data.get("items", [])
-                if item.get("id", {}).get("videoId")
-            ]
+                if self.channel_name:
+                    batch_query_terms.append(self.channel_name)
 
-            if not video_ids:
-                continue
+                batch_found_results = False
+                for region_code, language_code in preference_pairs:
+                    search_params = {
+                        "part": "snippet",
+                        "type": "video",
+                        "maxResults": min(self.batch_size, 50),
+                        "order": "relevance",
+                        "safeSearch": "none",
+                        "key": self.api_key,
+                        "q": " ".join(batch_query_terms).strip(),
+                    }
+                    if region_code:
+                        search_params["regionCode"] = region_code
+                    if language_code:
+                        search_params["relevanceLanguage"] = language_code
 
-            details_response = self._request_with_retry(
-                "https://www.googleapis.com/youtube/v3/videos",
-                params={
-                    "part": "snippet,contentDetails",
-                    "id": ",".join(video_ids),
-                    "key": self.api_key,
-                },
-            )
-            if details_response.status_code != 200:
-                raise RuntimeError(
-                    f"[YouTube] YouTube video details API returned {details_response.status_code}"
-                )
+                    print(
+                        f"[YouTube] Searching with region={region_code} language={language_code} for query={search_params['q']}"
+                    )
 
-            details_data = details_response.json()
-            batch_results = {}
-            for item in details_data.get("items", []):
-                duration_seconds = self._parse_duration(item.get("contentDetails", {}).get("duration", ""))
-                if self.min_length <= duration_seconds <= self.max_length:
-                    video_id = item["id"]
-                    if video_id in filtered_videos:
+                    search_response = self._request_with_retry(
+                        "https://www.googleapis.com/youtube/v3/search",
+                        params=search_params,
+                    )
+                    if search_response.status_code != 200:
+                        raise RuntimeError(
+                            f"[YouTube] YouTube search API returned {search_response.status_code}"
+                        )
+
+                    search_data = search_response.json()
+                    video_ids = [
+                        item["id"]["videoId"]
+                        for item in search_data.get("items", [])
+                        if item.get("id", {}).get("videoId")
+                    ]
+
+                    if not video_ids:
                         continue
-                    title = item.get("snippet", {}).get("title", "Untitled Video")
-                    batch_results[video_id] = f"{title} | https://www.youtube.com/watch?v={video_id}"
 
-            for video_id, label in list(batch_results.items())[: self.batch_size]:
-                filtered_videos[video_id] = label
+                    batch_found_results = True
+                    details_response = self._request_with_retry(
+                        "https://www.googleapis.com/youtube/v3/videos",
+                        params={
+                            "part": "snippet,contentDetails",
+                            "id": ",".join(video_ids),
+                            "key": self.api_key,
+                        },
+                    )
+                    if details_response.status_code != 200:
+                        raise RuntimeError(
+                            f"[YouTube] YouTube video details API returned {details_response.status_code}"
+                        )
+
+                    details_data = details_response.json()
+                    batch_results = {}
+                    for item in details_data.get("items", []):
+                        duration_seconds = self._parse_duration(item.get("contentDetails", {}).get("duration", ""))
+                        if self.min_length <= duration_seconds <= self.max_length:
+                            video_id = item["id"]
+                            if video_id in filtered_videos:
+                                continue
+                            title = item.get("snippet", {}).get("title", "Untitled Video")
+                            batch_results[video_id] = f"{title} | https://www.youtube.com/watch?v={video_id}"
+
+                    for video_id, label in list(batch_results.items())[: self.batch_size]:
+                        filtered_videos[video_id] = label
+
+                if batch_found_results:
+                    batch_success = True
+                    break
+
+            if not batch_success:
+                print(
+                    f"[YouTube] Batch {batch_index + 1} produced no usable results after retrying with new keyword subsets."
+                )
 
         if not filtered_videos:
             raise RuntimeError(
