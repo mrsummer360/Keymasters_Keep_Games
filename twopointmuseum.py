@@ -134,6 +134,16 @@ class TwoPointMuseumGame(Game):
         if self.include_digiverse:
             self.expedition_list.extend(self.expeditions_digiverse())
 
+        self.subthemes_list = self.subthemes_no_dlc()
+        if self.include_fantasy:
+            self.subthemes_list.extend(self.subthemes_fantasy())
+        if self.include_zooseum:
+            self.subthemes_list.extend(self.subthemes_zooseum())
+        if self.include_artyfacts:
+            self.subthemes_list.extend(self.subthemes_artyfacts())
+        if self.include_digiverse:
+            self.subthemes_list.extend(self.subthemes_digiverse())
+
         # general goals
         game_objective_templates.extend([
             GameObjectiveTemplate(
@@ -169,6 +179,15 @@ class TwoPointMuseumGame(Game):
                 label="Reach Curator Level LEVEL",
                 data={
                     "LEVEL": (self.curator_level, 1)
+                },
+                is_time_consuming=False,
+                is_difficult=False,
+                weight=3,
+            ),
+            GameObjectiveTemplate(
+                label="Display all SUBTHEME exhibits in one museum",
+                data={
+                    "SUBTHEME": (self.subthemes_list, 1)
                 },
                 is_time_consuming=False,
                 is_difficult=False,
@@ -404,6 +423,32 @@ class TwoPointMuseumGame(Game):
         return [
             "Meat Wizard", "Dredge", "Vampire Survivors", "Revenge of the savage Planet", "Angry Birds", "Dave The Diver", "Cult of the Lamb"
         ]
+    @staticmethod
+    def subthemes_no_dlc() -> List[str]:
+        return [
+            "Man-Eating Plants", "Edible Plants", "Mountainous Plants", "Tropical Plants", "Foreign Flora", "Interactive Display (Botany)", "Temperate Fish", "Tropical Fish", "Coldwater Fish", "Sea Monsters", "Wetlantean Artefacts", "Wetlantean Ruins", "Interactive Displays (Marine Life)", "Cursed Objects", "Ghost Dusting Equipment", "Famous Possessions", "Famous Spirits", "Famous Spirits", "Industrial Age Spirits", "Natural Spirits", "Dark Age Spirits", "Sunken Spirits", "Interactive Displays (Supernatural)", "Classic Contraptions", "Custom Contraptions", "Interactive Displays (General)", "Interactive Displays (Science)", "Reward Exhibit", "Astral Anomalies", "Cheese-Moonger Artefacts", "Frogborne Artefacts", "Space Gibbon Artefacts", "Space Junk", "Interactive Displays (Space)", "Dinosaur Bones", "Fossils", "Frozen Finds", "Ancient Inventions", "Preserved History", "Prehistoric Mysteries", "Interactive Displays (Prehistory)"
+        ]
+    @staticmethod
+    def subthemes_digiverse() -> List[str]:
+        return [
+            "Cult of the Museum", "Meat Wizard", "Relics", "Pig Fortresses", "Interactive Displays (Digiverse)"
+        ]
+    @staticmethod
+    def subthemes_fantasy() -> List[str]:
+        return [
+            "Canon Fodder", "Dwarven Devices", "Enchanting Items", "Mythical Gear", "Interactive Dispalays (Fantasy)"
+        ]
+    @staticmethod
+    def subthemes_zooseum() -> List[str]:
+        return [
+            "Aves", "Canidae", "Felidae", "Inanimata", "Insecta", "Mammelia Majoris", "Mammelia Minoris", "Reptilia", "Ursidae", "Interactive Displays (Wildlife)"
+        ]
+    @staticmethod
+    def subthemes_artyfacts() -> List[str]:
+        return [
+            "Famous Art", "Interactive Art", "Interactive Displays (Art)"
+        ]
+    
 
 
 # Archipelago Options 
