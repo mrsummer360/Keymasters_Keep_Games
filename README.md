@@ -221,6 +221,33 @@ The Optional Challenges are tied to Sandbox mode and are therefore only availabl
  - Start with Specific Temperature
  - Use a specific Sandbox mode custom setting (includes all of the settings above)
 
+### Two Point Museum
+__Version:__ 1.2
+
+__Download:__ [LINK](https://github.com/mrsummer360/Keymasters_Keep_Games/blob/main/twopointmuseum.py)
+
+__Description:__
+Two Point Museum is a management simulation game about building, expanding, and running a successful museum. Players must design facilities, hire and train staff, curate a wide variety of exhibits, manage finances, and lead expeditions to recover rare artefacts. The base game is supported by several DLC packs that add new museums, expedition maps, rooms, skills, and unique gameplay content. The game is often played in a Sandbox-style setup, where the player can tune many systems.
+
+__KMK Implementation:__
+The implementation is centered around generic museum progression and sandbox challenge goals. It includes staff training targets, museum level progression, Curator Level milestones, Skill training, Map exploration, and custom sandbox goals that can be individually activated. The DLC packs can be toggled on or off independently, which alters the available skills, expedition maps, and museum pools used in the generated objectives. Each room has optional constraints, with basic configuration and customized configurations for each difficulty. 
+
+#### Objectives
+1. Museum Progression
+   - Get Museum Level LEVEL
+   - Get Museum Level LEVEL on MAP
+2. Staff Training
+   - Train a staff member to LEVEL in SKILL
+3. Curator Level
+   - Reach Curator Level LEVEL
+4. Exploration
+   - Unlock POIs Points of Interest on MAP
+   - Display all SUBTHEME exhibits in one museum
+5. Stars
+   - Get STARS Stars in MAP
+
+
+
 ### YouTube
 __Version:__ 1.0
 
