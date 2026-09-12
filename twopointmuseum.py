@@ -59,20 +59,20 @@ class TwoPointMuseumGame(Game):
             GameObjectiveTemplate(    
                 label="Play in Sandbox Mode on Creative Difficulty",
                 data={}, 
-                weight=1
+                weight=4
             ),
             GameObjectiveTemplate(
                 label="Play in Sandbox Mode on Career Difficulty",
                 data={},
-                weight=1
+                weight=4
             ),
             GameObjectiveTemplate(    
                 label="Play in Sandbox Mode on Hardcore Difficulty",
                 data={},
-                weight=1
+                weight=4
             ),
             GameObjectiveTemplate(    
-                label="Custom Sandbox: GOAL, THIEVES, LOTS, CASH, KUDOSH, DONATIONS, SALARIES, MIN_GRANT, MAX_GRANT, CURATOR, UNLOCK_K, UNLOCK_ENLIGHTENMENT, UNLOCK_WORKSHOP, UNLOCK_POI, SURVEY_LEVEL",
+                label="Custom HC Sandbox: GOAL, THIEVES, LOTS, CASH, KUDOSH, DONATIONS, SALARIES, MIN_GRANT, MAX_GRANT, CURATOR, UNLOCK_K, UNLOCK_ENLIGHTENMENT, UNLOCK_WORKSHOP, UNLOCK_POI, SURVEY_LEVEL",
                 data={
                     "GOAL": (self.sandbox_goal, 1),
                     "THIEVES": (self.thief_threat, 1),
@@ -92,6 +92,48 @@ class TwoPointMuseumGame(Game):
                 },
                 weight=1
             ),
+            GameObjectiveTemplate(    
+                label="Custom Creative Sandbox: GOAL, THIEVES, LOTS, CASH, KUDOSH, DONATIONS, SALARIES, MIN_GRANT, MAX_GRANT, CURATOR, UNLOCK_K, UNLOCK_ENLIGHTENMENT, UNLOCK_WORKSHOP, UNLOCK_POI, SURVEY_LEVEL",
+                data={
+                    "GOAL": (self.sandbox_goal, 1),
+                    "THIEVES": (self.thief_threat, 1),
+                    "LOTS": (self.lot_status, 1),
+                    "CASH": (self.starting_cash_creative, 1),
+                    "KUDOSH": (self.starting_kudosh_creative, 1),
+                    "DONATIONS": (self.donation_multiplier, 1),
+                    "SALARIES": (self.salary_multiplier, 1),
+                    "MIN_GRANT": (self.minimum_monthly_grant, 1),
+                    "MAX_GRANT": (self.maximum_monthly_grant, 1),
+                    "CURATOR": (self.disable_curator_objectives, 1),
+                    "UNLOCK_K": (self.unlock_kudosh_items, 1),
+                    "UNLOCK_ENLIGHTENMENT": (self.unlock_enlightenment_items, 1),
+                    "UNLOCK_WORKSHOP": (self.unlock_workshop_contraptions, 1),
+                    "UNLOCK_POI": (self.unlock_all_pois, 1),
+                    "SURVEY_LEVEL": (self.start_max_survey_level, 1),
+                },
+                weight=1
+            ),
+            GameObjectiveTemplate(    
+                label="Custom Career Sandbox: GOAL, THIEVES, LOTS, CASH, KUDOSH, DONATIONS, SALARIES, MIN_GRANT, MAX_GRANT, CURATOR, UNLOCK_K, UNLOCK_ENLIGHTENMENT, UNLOCK_WORKSHOP, UNLOCK_POI, SURVEY_LEVEL",
+                data={
+                    "GOAL": (self.sandbox_goal, 1),
+                    "THIEVES": (self.thief_threat, 1),
+                    "LOTS": (self.lot_status, 1),
+                    "CASH": (self.starting_cash_creative, 1),
+                    "KUDOSH": (self.starting_kudosh_creative, 1),
+                    "DONATIONS": (self.donation_multiplier, 1),
+                    "SALARIES": (self.salary_multiplier, 1),
+                    "MIN_GRANT": (self.minimum_monthly_grant, 1),
+                    "MAX_GRANT": (self.maximum_monthly_grant, 1),
+                    "CURATOR": (self.disable_curator_objectives, 1),
+                    "UNLOCK_K": (self.unlock_kudosh_items, 1),
+                    "UNLOCK_ENLIGHTENMENT": (self.unlock_enlightenment_items, 1),
+                    "UNLOCK_WORKSHOP": (self.unlock_workshop_contraptions, 1),
+                    "UNLOCK_POI": (self.unlock_all_pois, 1),
+                    "SURVEY_LEVEL": (self.start_max_survey_level, 1),
+                },
+                weight=1
+            ),            
         ])        
         return tpm_constraint_list
 
@@ -176,7 +218,7 @@ class TwoPointMuseumGame(Game):
                 weight=3,
             ),
             GameObjectiveTemplate(
-                label="Reach Curator Level LEVEL",
+                label="Reach Curator Level LEVEL (or stars in any one museum if Curator Level is off)",
                 data={
                     "LEVEL": (self.curator_level, 1)
                 },
@@ -299,12 +341,6 @@ class TwoPointMuseumGame(Game):
     
        
     # Ranges
-    def sandbox_goal(self) -> List[str]:
-        return ["Total Buzz", "Traditional"]    
-    def thief_threat(self) -> List[str]:
-        return ["None", "Low", "Medium", "High"]
-    def lot_status(self) -> List[str]:
-        return ["Locked", "Unlocked"]
     def starting_cash(self) -> range:
         return range(0, 100000, 10000)   
     def starting_kudosh(self) -> range:
@@ -328,28 +364,46 @@ class TwoPointMuseumGame(Game):
     def number_points_of_interest(self) -> range:
         return range(1, 16, 1)
     
+    def starting_cash_creative(self) -> range:
+        return range(0, 2000000, 200000)   
+    def starting_kudosh_creative(self) -> range:
+        return range(0, 10000, 1000) 
 
+
+    def starting_cash_career(self) -> range:
+        return range(0, 500000, 50000)   
+    def starting_kudosh(self) -> range:
+        return range(0, 1000, 100) 
 
     
     # Data lists
+    @staticmethod
+    def sandbox_goal(self) -> List[str]:
+        return ["Total Buzz", "Traditional"]    
+    @staticmethod
+    def thief_threat(self) -> List[str]:
+        return ["None", "Low", "Medium", "High"]
+    @staticmethod
+    def lot_status(self) -> List[str]:
+        return ["All Locked", "All Unlocked"]    
     @staticmethod    
     def disable_curator_objectives() -> List[str]:
-        return ["Enabled", "Disabled"]
+        return ["Off", "On"]
     @staticmethod
     def unlock_kudosh_items() -> List[str]:
-        return ["Locked", "Unlocked"]
+        return ["Off", "On"]
     @staticmethod
     def unlock_enlightenment_items() -> List[str]:
-        return ["Locked", "Unlocked"]
+        return ["Off", "On"]
     @staticmethod
     def unlock_workshop_contraptions() -> List[str]:
-        return ["Locked", "Unlocked"]
+        return ["Off", "On"]
     @staticmethod
     def unlock_all_pois() -> List[str]:
-        return ["Locked", "Unlocked"]
+        return ["Off", "On"]
     @staticmethod
     def start_max_survey_level() -> range:
-        return ["Normal", "Maximum"]
+        return ["Off", "On"]
     @staticmethod
     def skills_no_dlc() -> List[str]:
         return [
