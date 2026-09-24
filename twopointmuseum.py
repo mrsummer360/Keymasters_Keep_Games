@@ -196,7 +196,7 @@ class TwoPointMuseumGame(Game):
                 },
                 is_time_consuming=False,
                 is_difficult=False,
-                weight=3,
+                weight=6,
             ),
             GameObjectiveTemplate(
                 label="Reach Museum Level LEVEL",
@@ -205,7 +205,7 @@ class TwoPointMuseumGame(Game):
                 },
                 is_time_consuming=False,
                 is_difficult=False,
-                weight=3,
+                weight=6,
             ),
             GameObjectiveTemplate(
                 label="Reach Museum Level LEVEL on MUSEUM",
@@ -215,7 +215,7 @@ class TwoPointMuseumGame(Game):
                 },
                 is_time_consuming=False,
                 is_difficult=False,
-                weight=3,
+                weight=6,
             ),
             GameObjectiveTemplate(
                 label="Reach Curator Level LEVEL (or stars in any one museum if Curator Level is off)",
@@ -224,7 +224,7 @@ class TwoPointMuseumGame(Game):
                 },
                 is_time_consuming=False,
                 is_difficult=False,
-                weight=3,
+                weight=6,
             ),
             GameObjectiveTemplate(
                 label="Display all SUBTHEME exhibits in one museum",
@@ -233,7 +233,7 @@ class TwoPointMuseumGame(Game):
                 },
                 is_time_consuming=False,
                 is_difficult=False,
-                weight=3,
+                weight=6,
             ),
         ])
 
@@ -247,7 +247,7 @@ class TwoPointMuseumGame(Game):
                 },
                 is_time_consuming=True,
                 is_difficult=False,
-                weight=3,
+                weight=6,
             ),
         ])
 
@@ -262,21 +262,56 @@ class TwoPointMuseumGame(Game):
                     },
                     is_time_consuming=False,
                     is_difficult=False,
-                    weight=3,
+                    weight=6,
                 )
             ])
 
         # POI Goals
         game_objective_templates.extend([
             GameObjectiveTemplate(
-                label="Unlock POI Points of Interest on MAP",
+                label="Unlock POI Points of Interest on Bone Belt",
                 data={
-                    "POI": (self.number_points_of_interest, 1),
-                    "MAP": (self.expedition_list, 1)
+                    "POI": (self.number_poi_bone_belt, 1)
                 },
                 is_time_consuming=True,
                 is_difficult=False,
-                weight=3,
+                weight=1,
+            ),
+            GameObjectiveTemplate(
+                label="Unlock POI Points of Interest on Two Point Sea",
+                data={
+                    "POI": (self.number_poi_two_point_sea, 1)
+                },
+                is_time_consuming=True,
+                is_difficult=False,
+                weight=1,
+            ),
+            GameObjectiveTemplate(
+                label="Unlock POI Points of Interest on Netherworld",
+                data={
+                    "POI": (self.number_poi_netherworld, 1)
+                },
+                is_time_consuming=True,
+                is_difficult=False,
+                weight=1,
+            ),
+            GameObjectiveTemplate(
+                label="Unlock POI Points of Interest on Bungle Burrows",
+                data={
+                    "POI": (self.number_poi_bungle_burrows, 1)
+                },
+                is_time_consuming=True,
+                is_difficult=False,
+                weight=1,
+            ),
+            GameObjectiveTemplate(
+                label="Unlock POI Points of Interest on Known Universe",
+                data={
+                    "POI": (self.number_poi_known_universe, 1)
+                },
+                is_time_consuming=True,
+                is_difficult=False,
+                weight=1,
             )
         ])
 
@@ -289,7 +324,16 @@ class TwoPointMuseumGame(Game):
                     is_time_consuming=True,
                     is_difficult=True,
                     weight=3,
-                )
+                ),
+                GameObjectiveTemplate(
+                    label="Unlock POI Points of Interest on Scorched Earth",
+                    data={
+                        "POI": (self.number_poi_scorched_earth, 1)
+                    },
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=1,
+                )            
             ])
 
         if self.include_digiverse:
@@ -302,8 +346,43 @@ class TwoPointMuseumGame(Game):
                     is_time_consuming=True,
                     is_difficult=True,
                     weight=3,
-                )
+                ),
+                GameObjectiveTemplate(
+                    label="Unlock POI Points of Interest on Digiverse",
+                    data={
+                        "POI": (self.number_poi_digiverse, 1)
+                    },
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=1,
+                )                
             ])
+
+        if self.include_zooseum:
+            game_objective_templates.extend([
+                GameObjectiveTemplate(
+                    label="Unlock POI Points of Interest on Farflung Isles",
+                    data={
+                        "POI": (self.number_poi_farflung_isles, 1)
+                    },
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=1,
+                )                
+            ])
+
+        if self.include_artyfacts:
+            game_objective_templates.extend([
+                GameObjectiveTemplate(
+                    label="Unlock POI Points of Interest on Zara's Sketchbook",
+                    data={
+                        "POI": (self.number_poi_zaras_sketchbook, 1)
+                    },
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=1,
+                )                
+            ])            
 
         return game_objective_templates
             
@@ -361,8 +440,25 @@ class TwoPointMuseumGame(Game):
         return range(5, self.max_museum_level, 1)
     def museum_stars(self) -> range:
         return range(1, self.max_stars, 1)
-    def number_points_of_interest(self) -> range:
-        return range(1, 16, 1)
+
+    def number_poi_bone_belt(self) -> range:
+        return range(1, 28, 1)
+    def number_poi_two_point_sea(self) -> range:
+        return range(1, 26, 1)
+    def number_poi_netherworld(self) -> range:
+        return range(1, 21, 1)
+    def number_poi_bungle_burrows(self) -> range:
+        return range(1, 20, 1)
+    def number_poi_known_universe(self) -> range:
+        return range(1, 16, 1)    
+    def number_poi_digiverse(self) -> range:
+        return range(1, 22, 1)    
+    def number_poi_scorched_earth(self) -> range:
+        return range(1, 24, 1)    
+    def number_poi_farflung_isles(self) -> range:
+        return range(1, 21, 1)    
+    def number_poi_zaras_sketchbook(self) -> range:
+        return range(1, 19, 1)    
     
     def starting_cash_creative(self) -> range:
         return range(0, 2000000, 200000)   
