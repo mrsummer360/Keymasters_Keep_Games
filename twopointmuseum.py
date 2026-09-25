@@ -235,6 +235,14 @@ class TwoPointMuseumGame(Game):
                 is_difficult=False,
                 weight=6,
             ),
+            GameObjectiveTemplate(
+                            label="Get all guest stickers",
+                            data={
+                            },
+                            is_time_consuming=False,
+                            is_difficult=False,
+                            weight=6,
+            ),
         ])
 
         # Sandbox Goals
@@ -315,6 +323,64 @@ class TwoPointMuseumGame(Game):
             )
         ])
 
+        # Enlightenment
+        game_objective_templates.extend([
+            GameObjectiveTemplate(
+                label="Reach LEVEL Enlightenment in Prehistory",
+                data={
+                    "LEVEL": (self.enlightenment_prehistory, 1)
+                },
+                is_time_consuming=True,
+                is_difficult=False,
+                weight=1,
+            ),
+            GameObjectiveTemplate(
+                label="Reach LEVEL Enlightenment in Botany",
+                data={
+                    "LEVEL": (self.enlightenment_botany, 1)
+                },
+                is_time_consuming=True,
+                is_difficult=False,
+                weight=1,
+            ),
+            GameObjectiveTemplate(
+                label="Reach LEVEL Enlightenment in Supernatural",
+                data={
+                    "LEVEL": (self.enlightenment_supernatural, 1)
+                },
+                is_time_consuming=True,
+                is_difficult=False,
+                weight=1,
+            ),
+            GameObjectiveTemplate(
+                label="Reach LEVEL Enlightenment in Space",
+                data={
+                    "LEVEL": (self.enlightenment_space, 1)
+                },
+                is_time_consuming=True,
+                is_difficult=False,
+                weight=1,
+            ),
+            GameObjectiveTemplate(
+                label="Reach LEVEL Enlightenment in Marine Life",
+                data={
+                    "LEVEL": (self.enlightenment_marine_life, 1)
+                },
+                is_time_consuming=True,
+                is_difficult=False,
+                weight=1,
+            ),            
+            GameObjectiveTemplate(
+                label="Reach LEVEL Enlightenment in science",
+                data={
+                    "LEVEL": (self.enlightenment_science, 1)
+                },
+                is_time_consuming=True,
+                is_difficult=False,
+                weight=1,
+            )
+        ])        
+
         # Special DLC Goals
         if self.include_fantasy:
             game_objective_templates.extend([
@@ -325,6 +391,15 @@ class TwoPointMuseumGame(Game):
                     is_difficult=True,
                     weight=3,
                 ),
+                GameObjectiveTemplate(
+                    label="Reach LEVEL Enlightenment in Fantasy",
+                    data={
+                        "LEVEL": (self.enlightenment_fantasy, 1)
+                    },
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=1,
+                ),                 
                 GameObjectiveTemplate(
                     label="Unlock POI Points of Interest on Scorched Earth",
                     data={
@@ -348,6 +423,15 @@ class TwoPointMuseumGame(Game):
                     weight=3,
                 ),
                 GameObjectiveTemplate(
+                    label="Reach LEVEL Enlightenment in Digital",
+                    data={
+                        "LEVEL": (self.enlightenment_digital, 1)
+                    },
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=1,
+                ),
+                GameObjectiveTemplate(
                     label="Unlock POI Points of Interest on Digiverse",
                     data={
                         "POI": (self.number_poi_digiverse, 1)
@@ -360,6 +444,15 @@ class TwoPointMuseumGame(Game):
 
         if self.include_zooseum:
             game_objective_templates.extend([
+                GameObjectiveTemplate(
+                    label="Reach LEVEL Enlightenment in Wildlife",
+                    data={
+                        "LEVEL": (self.enlightenment_wildlife, 1)
+                    },
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=1,
+                ),                
                 GameObjectiveTemplate(
                     label="Unlock POI Points of Interest on Farflung Isles",
                     data={
@@ -459,6 +552,31 @@ class TwoPointMuseumGame(Game):
         return range(1, 21, 1)    
     def number_poi_zaras_sketchbook(self) -> range:
         return range(1, 19, 1)    
+
+    def enlightenment_prehistory(self) -> range:
+            return range(1, 50, 1)
+    def enlightenment_botany(self) -> range:
+            return range(1, 40, 1)
+    def enlightenment_supernatural(self) -> range:
+            return range(1, 50, 1)
+    def enlightenment_marine_life(self) -> range:
+            return range(1, 50, 1)
+    def enlightenment_science(self) -> range:
+            return range(1, 20, 1)
+    def enlightenment_space(self) -> range:
+            return range(1, 50, 1)
+    def enlightenment_digital(self) -> range:
+            return range(1, 12, 1)
+    def enlightenment_fantasy(self) -> range:
+            return range(1, 50, 1)
+    def enlightenment_wildlife(self) -> range:
+            return range(1, 25, 1)
+    
+    
+    
+    
+    
+  
     
     def starting_cash_creative(self) -> range:
         return range(0, 2000000, 200000)   
