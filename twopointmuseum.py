@@ -471,10 +471,54 @@ class TwoPointMuseumGame(Game):
                     data={
                         "POI": (self.number_poi_zaras_sketchbook, 1)
                     },
-                    is_time_consuming=True,
+                    is_time_consuming=False,
                     is_difficult=False,
                     weight=1,
-                )                
+                ),
+                GameObjectiveTemplate(
+                    label="Create a TYPE artwork of at least QUALITY quality",
+                    data={
+                        "TYPE": (self.art_studio_paintings, 1),
+                        "QUALITY": (self.quality, 1)
+                    },
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=2,
+                ),     
+                GameObjectiveTemplate(
+                    label="Create a TYPE artwork made from MATERIAL of at least QUALITY quality",
+                    data={
+                        "TYPE": (self.art_studio_sculptures, 1),
+                        "MATERIAL": (self.art_materials),
+                        "QUALITY": (self.quality, 1)
+                    },
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=2,
+                ),
+                GameObjectiveTemplate(
+                    label="Create a TYPE artwork evoking EMOTION of at least QUALITY quality",
+                    data={
+                        "TYPE": (self.art_studio_paintings, 1),
+                        "EMOTION": (self.art_emotions),
+                        "QUALITY": (self.quality, 1)
+                    },
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=2,
+                ),     
+                GameObjectiveTemplate(
+                    label="Create a TYPE artwork evoking EMOTION made from MATERIAL of at least QUALITY quality",
+                    data={
+                        "TYPE": (self.art_studio_sculptures, 1),
+                        "EMOTION": (self.art_emotions),                        
+                        "MATERIAL": (self.art_materials),
+                        "QUALITY": (self.quality, 1)
+                    },
+                    is_time_consuming=False,
+                    is_difficult=False,
+                    weight=2,
+                ),                                              
             ])            
 
         return game_objective_templates
@@ -572,17 +616,10 @@ class TwoPointMuseumGame(Game):
     def enlightenment_wildlife(self) -> range:
             return range(1, 25, 1)
     
-    
-    
-    
-    
-  
-    
     def starting_cash_creative(self) -> range:
         return range(0, 2000000, 200000)   
     def starting_kudosh_creative(self) -> range:
         return range(0, 10000, 1000) 
-
 
     def starting_cash_career(self) -> range:
         return range(0, 500000, 50000)   
@@ -716,7 +753,31 @@ class TwoPointMuseumGame(Game):
         return [
             "Famous Art", "Interactive Art", "Interactive Displays (Art)"
         ]
-    
+    @staticmethod
+    def quality() -> List[str]:
+        return [
+            "Average","Great", "Epic", "Pristine"
+        ]
+    @staticmethod
+    def art_emotions() -> List[str]:
+            return [
+                "Disgust", "Humour", "Joy", "Sophistication", "Sorrow", "Rage", "Romance"
+            ]
+    @staticmethod
+    def art_studio_paintings() -> List[str]:
+        return [
+            "Painting", "Portrait"
+        ]
+    @staticmethod
+    def art_studio_sculptures() -> List[str]:
+        return [
+            "Sculpture", "Statue"
+        ]    
+    @staticmethod
+    def art_materials() -> List[str]:
+        return [
+            "Clay","Bronze", "Marbel"
+        ]    
 
 
 # Archipelago Options 
