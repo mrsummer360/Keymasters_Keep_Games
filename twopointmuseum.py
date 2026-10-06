@@ -18,6 +18,9 @@ class TwoPointMuseumArchipelagoOptions:
     tpm_include_challenges: TpmIncludeChallenges
     tpm_challenge_sandbox: TpmChallengeSandbox
 
+    # Constraints
+    tpm_loan_constraints: TpmLoanConstraints    
+
     # DLC
     tpm_include_explorer: TpmIncludeExplorer
     tpm_include_zooseum: TpmIncludeZooseum
@@ -54,6 +57,98 @@ class TwoPointMuseumGame(Game):
         tpm_constraint_list: list[GameObjectiveTemplate]
 
         tpm_constraint_list = []
+
+        if self.include_loan_constraints:
+                tpm_constraint_list.extend([
+                GameObjectiveTemplate(    
+                    label="Play in Sandbox Mode on Creative Difficulty CONSTRAINT",
+                    data={
+                        "CONSTRAINT": (self.loan_constraints, 1)
+                    }, 
+                    weight=4
+                ),
+                GameObjectiveTemplate(
+                    label="Play in Sandbox Mode on Career Difficulty CONSTRAINT",
+                    data={
+                        "CONSTRAINT": (self.loan_constraints, 1)
+                    },
+                    weight=4
+                ),
+                GameObjectiveTemplate(    
+                    label="Play in Sandbox Mode on Hardcore Difficulty CONSTRAINT",
+                    data={
+                        "CONSTRAINT": (self.loan_constraints, 1)
+                    },
+                    weight=4
+                ),
+                GameObjectiveTemplate(    
+                    label="Custom HC Sandbox CONSTRAINT: GOAL, THIEVES, LOTS, CASH, KUDOSH, DONATIONS, SALARIES, MIN_GRANT, MAX_GRANT, CURATOR, UNLOCK_K, UNLOCK_ENLIGHTENMENT, UNLOCK_WORKSHOP, UNLOCK_POI, SURVEY_LEVEL",
+                    data={
+                        "CONSTRAINT": (self.loan_constraints, 1),
+                        "GOAL": (self.sandbox_goal, 1),
+                        "THIEVES": (self.thief_threat, 1),
+                        "LOTS": (self.lot_status, 1),
+                        "CASH": (self.starting_cash, 1),
+                        "KUDOSH": (self.starting_kudosh, 1),
+                        "DONATIONS": (self.donation_multiplier, 1),
+                        "SALARIES": (self.salary_multiplier, 1),
+                        "MIN_GRANT": (self.minimum_monthly_grant, 1),
+                        "MAX_GRANT": (self.maximum_monthly_grant, 1),
+                        "CURATOR": (self.disable_curator_objectives, 1),
+                        "UNLOCK_K": (self.unlock_kudosh_items, 1),
+                        "UNLOCK_ENLIGHTENMENT": (self.unlock_enlightenment_items, 1),
+                        "UNLOCK_WORKSHOP": (self.unlock_workshop_contraptions, 1),
+                        "UNLOCK_POI": (self.unlock_all_pois, 1),
+                        "SURVEY_LEVEL": (self.start_max_survey_level, 1),
+                    },
+                    weight=1
+                ),
+                GameObjectiveTemplate(    
+                    label="Custom Creative Sandbox CONSTRAINT: GOAL, THIEVES, LOTS, CASH, KUDOSH, DONATIONS, SALARIES, MIN_GRANT, MAX_GRANT, CURATOR, UNLOCK_K, UNLOCK_ENLIGHTENMENT, UNLOCK_WORKSHOP, UNLOCK_POI, SURVEY_LEVEL",
+                    data={
+                        "CONSTRAINT": (self.loan_constraints, 1),
+                        "GOAL": (self.sandbox_goal, 1),
+                        "THIEVES": (self.thief_threat, 1),
+                        "LOTS": (self.lot_status, 1),
+                        "CASH": (self.starting_cash_creative, 1),
+                        "KUDOSH": (self.starting_kudosh_creative, 1),
+                        "DONATIONS": (self.donation_multiplier, 1),
+                        "SALARIES": (self.salary_multiplier, 1),
+                        "MIN_GRANT": (self.minimum_monthly_grant, 1),
+                        "MAX_GRANT": (self.maximum_monthly_grant, 1),
+                        "CURATOR": (self.disable_curator_objectives, 1),
+                        "UNLOCK_K": (self.unlock_kudosh_items, 1),
+                        "UNLOCK_ENLIGHTENMENT": (self.unlock_enlightenment_items, 1),
+                        "UNLOCK_WORKSHOP": (self.unlock_workshop_contraptions, 1),
+                        "UNLOCK_POI": (self.unlock_all_pois, 1),
+                        "SURVEY_LEVEL": (self.start_max_survey_level, 1),
+                    },
+                    weight=1
+                ),
+                GameObjectiveTemplate(    
+                    label="Custom Career Sandbox CONSTRAINT: GOAL, THIEVES, LOTS, CASH, KUDOSH, DONATIONS, SALARIES, MIN_GRANT, MAX_GRANT, CURATOR, UNLOCK_K, UNLOCK_ENLIGHTENMENT, UNLOCK_WORKSHOP, UNLOCK_POI, SURVEY_LEVEL",
+                    data={
+                        "CONSTRAINT": (self.loan_constraints, 1),
+                        "GOAL": (self.sandbox_goal, 1),
+                        "THIEVES": (self.thief_threat, 1),
+                        "LOTS": (self.lot_status, 1),
+                        "CASH": (self.starting_cash_creative, 1),
+                        "KUDOSH": (self.starting_kudosh_creative, 1),
+                        "DONATIONS": (self.donation_multiplier, 1),
+                        "SALARIES": (self.salary_multiplier, 1),
+                        "MIN_GRANT": (self.minimum_monthly_grant, 1),
+                        "MAX_GRANT": (self.maximum_monthly_grant, 1),
+                        "CURATOR": (self.disable_curator_objectives, 1),
+                        "UNLOCK_K": (self.unlock_kudosh_items, 1),
+                        "UNLOCK_ENLIGHTENMENT": (self.unlock_enlightenment_items, 1),
+                        "UNLOCK_WORKSHOP": (self.unlock_workshop_contraptions, 1),
+                        "UNLOCK_POI": (self.unlock_all_pois, 1),
+                        "SURVEY_LEVEL": (self.start_max_survey_level, 1),
+                    },
+                    weight=1
+                ),            
+            ])        
+            
 
         tpm_constraint_list.extend([
             GameObjectiveTemplate(    
@@ -525,6 +620,9 @@ class TwoPointMuseumGame(Game):
             
     # Property checks
     @property
+    def include_loan_constraints(self) -> bool:
+        return self.archipelago_options.tpm_loan_constraints.value
+    @property
     def include_digiverse(self) -> bool:
         return self.archipelago_options.tpm_include_digiverse.value
     @property
@@ -778,6 +876,11 @@ class TwoPointMuseumGame(Game):
         return [
             "Clay","Bronze", "Marbel"
         ]    
+    @staticmethod
+    def loan_constraints() -> List[str]:
+        return [
+            "without taking a loan", "without going bankrupt", "without taking a loan or going bankrupt"
+        ]
 
 
 # Archipelago Options 
@@ -787,6 +890,9 @@ class TpmIncludeChallenges(DefaultOnToggle):
 class TpmChallengeSandbox(DefaultOnToggle):
     """Include the Pop-Up Museums for Star Goals in Sandbox Mode"""
     display_name = "Include Challenges in Sandbox"
+class TpmLoanConstraints(DefaultOnToggle):
+    """Include Loan Constraints for Objectives"""
+    display_name = "Include Loan Constraints for Objectives"    
 class TpmIncludeExplorer(DefaultOnToggle):
     """Include Explorer Add On Content"""
     display_name = "Include Explorer Add On Content"
