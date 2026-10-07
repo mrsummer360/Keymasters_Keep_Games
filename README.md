@@ -232,6 +232,11 @@ Two Point Museum is a management simulation game about building, expanding, and 
 __KMK Implementation:__
 The implementation is centered around generic museum progression and sandbox challenge goals. It includes staff training targets, museum level progression, Curator Level milestones, Skill training, Map exploration, and custom sandbox goals that can be individually activated. The DLC packs can be toggled on or off independently, which alters the available skills, expedition maps, and museum pools used in the generated objectives. Each room has optional constraints, with basic configuration and customized configurations for each difficulty. 
 
+__Recommended Custom Rules:__
+Popup Museum badges only can be earned in Campaign mode.
+When using the optional constraints, if curator level is needed and the setting doesn't have the curator level constraints enabled, take the second number in the stars counter (the total number of stars across all museums) instead. 
+When the objective is to display all items within one category, use the sticker album for the category. If you want an extra challenge, look for secret items within the category on the Wiki, many Digiverse exhibits are not shown as silhuettes in the sticker album.  
+
 #### Objectives
 1. Museum Progression
    - Get Museum Level LEVEL
