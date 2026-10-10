@@ -26,6 +26,7 @@ class TwoPointMuseumArchipelagoOptions:
     tpm_include_zooseum: TpmIncludeZooseum
     tpm_include_fantasy: TpmIncludeFantasy
     tpm_include_artyfacts: TpmIncludeArtyfacts
+    tpm_include_rides_and_relics: TpmIncludeRidesAndRelics
 
     #Digiverse
     tpm_include_digiverse: TpmIncludeDigiverse
@@ -245,6 +246,8 @@ class TwoPointMuseumGame(Game):
             self.skill_list.extend(self.skills_fantasy())
         if self.include_artyfacts: 
             self.skill_list.extend(self.skills_artyfacts())
+        if self.include_rides_and_relics:
+            self.skill_list.extend(self.skills_gears_and_relics())
 
         self.challenge_list = self.museums_popup()
         if self.include_explorer:
@@ -270,6 +273,8 @@ class TwoPointMuseumGame(Game):
             self.expedition_list.extend(self.expeditions_artyfacts())
         if self.include_digiverse:
             self.expedition_list.extend(self.expeditions_digiverse())
+        if self.include_rides_and_relics:
+            self.expedition_list.extend(self.expeditions_rides_and_relics())
 
         self.subthemes_list = self.subthemes_no_dlc()
         if self.include_fantasy:
@@ -280,6 +285,8 @@ class TwoPointMuseumGame(Game):
             self.subthemes_list.extend(self.subthemes_artyfacts())
         if self.include_digiverse:
             self.subthemes_list.extend(self.subthemes_digiverse())
+        if self.include_rides_and_relics:
+            self.subthemes_list.extend(self.subthemes_rides_and_relics())
 
         # general goals
         game_objective_templates.extend([
@@ -616,6 +623,73 @@ class TwoPointMuseumGame(Game):
                 ),                                              
             ])            
 
+        if self.include_rides_and_relics:
+            game_objective_templates.extend([
+                GameObjectiveTemplate(
+                    label="Reach LEVEL Enlightenment in Fairgrounds",
+                    data={
+                        "LEVEL": (self.enlightenment_fairground, 1)
+                    },
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=1,
+                ),                
+                GameObjectiveTemplate(
+                    label="Unlock POI Points of Interest on Gearbox Fairground",
+                    data={
+                        "POI": (self.number_poi_gearbox_fairground, 1)
+                    },
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=1,
+                ),
+                GameObjectiveTemplate(
+                    label="Unlock all mascot costumes",
+                    data={
+                    },
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=1,
+                ),
+                GameObjectiveTemplate(
+                    label="Build a Rollercoaster with at least INTENSITY intensity",
+                    data={
+                        "INTENSITY": (self.intensity, 1)
+                    },
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=1,
+                ),
+                GameObjectiveTemplate(
+                    label="Build a Rollercoaster with at least FEROCITY ferocity",
+                    data={
+                        "FEROCITY": (self.ferocity_nausea, 1)
+                    },
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=1,
+                ),                
+                GameObjectiveTemplate(
+                    label="Build a Rollercoaster with at least NAUSEA nausea",
+                    data={
+                        "NAUSEA": (self.ferocity_nausea, 1)
+                    },
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=1,
+                ),
+                GameObjectiveTemplate(
+                    label="Have NUMBER rides with at least RIBBONS ribbons",
+                    data={
+                        "NUMBER": (self.number_rides, 1),
+                        "RIBBONS": (self.ribbons, 1)
+                    },
+                    is_time_consuming=True,
+                    is_difficult=False,
+                    weight=1,
+                ),                                                          
+            ])
+
         return game_objective_templates
             
     # Property checks
@@ -677,23 +751,25 @@ class TwoPointMuseumGame(Game):
         return range(1, self.max_stars, 1)
 
     def number_poi_bone_belt(self) -> range:
-        return range(1, 28, 1)
+        return range(1, 38, 1)
     def number_poi_two_point_sea(self) -> range:
-        return range(1, 26, 1)
+        return range(1, 35, 1)
     def number_poi_netherworld(self) -> range:
-        return range(1, 21, 1)
+        return range(1, 28, 1)
     def number_poi_bungle_burrows(self) -> range:
-        return range(1, 20, 1)
+        return range(1, 35, 1)
     def number_poi_known_universe(self) -> range:
-        return range(1, 16, 1)    
+        return range(1, 17, 1)    
     def number_poi_digiverse(self) -> range:
-        return range(1, 22, 1)    
+        return range(1, 25, 1)    
     def number_poi_scorched_earth(self) -> range:
-        return range(1, 24, 1)    
+        return range(1, 30, 1)    
     def number_poi_farflung_isles(self) -> range:
-        return range(1, 21, 1)    
+        return range(1, 25, 1)    
     def number_poi_zaras_sketchbook(self) -> range:
-        return range(1, 19, 1)    
+        return range(1, 20, 1)    
+    def number_poi_gearbox_fairground(self) -> range:
+        return range(1, 26, 1)        
 
     def enlightenment_prehistory(self) -> range:
             return range(1, 50, 1)
@@ -713,16 +789,26 @@ class TwoPointMuseumGame(Game):
             return range(1, 50, 1)
     def enlightenment_wildlife(self) -> range:
             return range(1, 25, 1)
+    def enlightenment_fairground(self) -> range:
+            return range(1, 17, 1)
     
     def starting_cash_creative(self) -> range:
         return range(0, 2000000, 200000)   
     def starting_kudosh_creative(self) -> range:
         return range(0, 10000, 1000) 
-
     def starting_cash_career(self) -> range:
         return range(0, 500000, 50000)   
     def starting_kudosh(self) -> range:
         return range(0, 1000, 100) 
+
+    def ferocity_nausea(self) -> range:
+        return range(0, 100, 1)
+    def intensity(self) -> range:
+        return range(0, 200, 1)
+    def ribbons(self) -> range:
+        return range(0, 3, 1)
+    def number_rides(self) -> range:
+        return range(0, 10, 1)
 
     
     # Data lists
@@ -779,7 +865,11 @@ class TwoPointMuseumGame(Game):
         return [
             "Potion Master"
         ]     
-    
+    @staticmethod
+    def skills_gears_and_relics() -> List[str]:
+        return [
+            "Complex Constructions"
+        ]         
     @staticmethod
     def museums_no_dlc() -> List[str]:
         return [
@@ -822,6 +912,11 @@ class TwoPointMuseumGame(Game):
             "Zara's Sketchbook"
         ]
     @staticmethod
+    def expeditions_rides_and_relics() -> List[str]:
+        return [
+            "Gearbox Fairgrounds"
+        ]    
+    @staticmethod
     def digiverse_list() -> List[str]:
         return [
             "Meat Wizard", "Dredge", "Vampire Survivors", "Revenge of the savage Planet", "Angry Birds", "Dave The Diver", "Cult of the Lamb"
@@ -835,6 +930,11 @@ class TwoPointMuseumGame(Game):
     def subthemes_digiverse() -> List[str]:
         return [
             "Cult of the Museum", "Meat Wizard", "Relics", "Pig Fortresses", "Interactive Displays (Digiverse)"
+        ]
+    @staticmethod
+    def subthemes_rides_and_relics() -> List[str]:
+        return [
+            "Antique Amusements", "Inventive Inventions", "Roller Coasters", "Manic Machinations", "Interactive Displays (Rides and Relics)"
         ]
     @staticmethod
     def subthemes_fantasy() -> List[str]:
@@ -897,10 +997,10 @@ class TpmIncludeExplorer(DefaultOnToggle):
     """Include Explorer Add On Content"""
     display_name = "Include Explorer Add On Content"
 class TpmIncludeZooseum(DefaultOnToggle):
-    """Include Farflung Isles, Silverbottom Park, Zooology Exhibits and Skills."""
+    """Include Farflung Isles, Silverbottom Park, Zooology Exhibits, and Skills."""
     display_name = "Include Zooseum Content"
 class TpmIncludeFantasy(DefaultOnToggle):
-    """Include Fantasy Experts, Scorched Earth and Exhibits"""
+    """Include Fantasy Experts, Scorched Earth, and Exhibits"""
     display_name = "Include Fantasy Finds Content"
 class TpmIncludeArtyfacts(DefaultOnToggle):
     """Include Artyfacts Exhibits and Skills"""
@@ -908,6 +1008,9 @@ class TpmIncludeArtyfacts(DefaultOnToggle):
 class TpmIncludeDigiverse(DefaultOnToggle):
     """Include Digiverse Exhibits and Skills"""
     display_name = "Include Digiverse Content"    
+class TpmIncludeRidesAndRelics(DefaultOnToggle):
+    """Include Rides and Relics Map, Exhibits, and Skills"""
+    display_name = "Include Rides and Relics Content"
 
 class TpmMaxCuratorLevel(NamedRange):
     """
