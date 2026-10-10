@@ -591,7 +591,7 @@ class TwoPointMuseumGame(Game):
                     label="Create a TYPE artwork made from MATERIAL of at least QUALITY quality",
                     data={
                         "TYPE": (self.art_studio_sculptures, 1),
-                        "MATERIAL": (self.art_materials),
+                        "MATERIAL": (self.art_materials, 1),
                         "QUALITY": (self.quality, 1)
                     },
                     is_time_consuming=False,
@@ -602,7 +602,7 @@ class TwoPointMuseumGame(Game):
                     label="Create a TYPE artwork evoking EMOTION of at least QUALITY quality",
                     data={
                         "TYPE": (self.art_studio_paintings, 1),
-                        "EMOTION": (self.art_emotions),
+                        "EMOTION": (self.art_emotions, 1),
                         "QUALITY": (self.quality, 1)
                     },
                     is_time_consuming=False,
@@ -613,8 +613,8 @@ class TwoPointMuseumGame(Game):
                     label="Create a TYPE artwork evoking EMOTION made from MATERIAL of at least QUALITY quality",
                     data={
                         "TYPE": (self.art_studio_sculptures, 1),
-                        "EMOTION": (self.art_emotions),                        
-                        "MATERIAL": (self.art_materials),
+                        "EMOTION": (self.art_emotions, 1),
+                        "MATERIAL": (self.art_materials, 1),
                         "QUALITY": (self.quality, 1)
                     },
                     is_time_consuming=False,
@@ -816,13 +816,13 @@ class TwoPointMuseumGame(Game):
     
     # Data lists
     @staticmethod
-    def sandbox_goal(self) -> List[str]:
+    def sandbox_goal() -> List[str]:
         return ["Total Buzz", "Traditional"]    
     @staticmethod
-    def thief_threat(self) -> List[str]:
+    def thief_threat() -> List[str]:
         return ["None", "Low", "Medium", "High"]
     @staticmethod
-    def lot_status(self) -> List[str]:
+    def lot_status() -> List[str]:
         return ["All Locked", "All Unlocked"]    
     @staticmethod    
     def disable_curator_objectives() -> List[str]:
