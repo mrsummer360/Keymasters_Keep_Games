@@ -715,6 +715,9 @@ class TwoPointMuseumGame(Game):
     def include_challenges(self) -> bool:
         return self.archipelago_options.tpm_include_challenges.value
     @property
+    def include_rides_and_relcis(self) -> bool:
+        return self.archipelago_options.tpm_include_rides_and_relcis.value
+    @property
     def challenge_sandbox(self) -> bool:
         return self.archipelago_options.tpm_challenge_sandbox.value
     @property
