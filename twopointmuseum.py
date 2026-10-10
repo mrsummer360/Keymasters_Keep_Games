@@ -83,13 +83,13 @@ class TwoPointMuseumGame(Game):
                     weight=4
                 ),
                 GameObjectiveTemplate(    
-                    label="Custom HC Sandbox CONSTRAINT: GOAL, THIEVES, LOTS, CASH, KUDOSH, DONATIONS, SALARIES, MIN_GRANT, MAX_GRANT, CURATOR, UNLOCK_K, UNLOCK_ENLIGHTENMENT, UNLOCK_WORKSHOP, UNLOCK_POI, SURVEY_LEVEL",
+                    label="Custom HC Sandbox CONSTRAINT: GOAL, THIEVES, LOTS, CASH $, KUDOSH K, DONATIONS %, SALARIES %, MIN_GRANT $, MAX_GRANT $, CURATOR, UNLOCK_K, UNLOCK_ENLIGHTENMENT, UNLOCK_WORKSHOP, UNLOCK_POI, SURVEY_LEVEL",
                     data={
                         "CONSTRAINT": (self.loan_constraints, 1),
                         "GOAL": (self.sandbox_goal, 1),
                         "THIEVES": (self.thief_threat, 1),
                         "LOTS": (self.lot_status, 1),
-                        "CASH": (self.starting_cash, 1),
+                        "CASH": (self.starting_cash_formatted, 1),
                         "KUDOSH": (self.starting_kudosh, 1),
                         "DONATIONS": (self.donation_multiplier, 1),
                         "SALARIES": (self.salary_multiplier, 1),
@@ -105,13 +105,13 @@ class TwoPointMuseumGame(Game):
                     weight=1
                 ),
                 GameObjectiveTemplate(    
-                    label="Custom Creative Sandbox CONSTRAINT: GOAL, THIEVES, LOTS, CASH, KUDOSH, DONATIONS, SALARIES, MIN_GRANT, MAX_GRANT, CURATOR, UNLOCK_K, UNLOCK_ENLIGHTENMENT, UNLOCK_WORKSHOP, UNLOCK_POI, SURVEY_LEVEL",
+                    label="Custom Creative Sandbox CONSTRAINT: GOAL, THIEVES, LOTS, CASH $, KUDOSH K, DONATIONS %, SALARIES %, MIN_GRANT $, MAX_GRANT $, CURATOR, UNLOCK_K, UNLOCK_ENLIGHTENMENT, UNLOCK_WORKSHOP, UNLOCK_POI, SURVEY_LEVEL",
                     data={
                         "CONSTRAINT": (self.loan_constraints, 1),
                         "GOAL": (self.sandbox_goal, 1),
                         "THIEVES": (self.thief_threat, 1),
                         "LOTS": (self.lot_status, 1),
-                        "CASH": (self.starting_cash_creative, 1),
+                        "CASH": (self.starting_cash_creative_formatted, 1),
                         "KUDOSH": (self.starting_kudosh_creative, 1),
                         "DONATIONS": (self.donation_multiplier, 1),
                         "SALARIES": (self.salary_multiplier, 1),
@@ -127,14 +127,14 @@ class TwoPointMuseumGame(Game):
                     weight=1
                 ),
                 GameObjectiveTemplate(    
-                    label="Custom Career Sandbox CONSTRAINT: GOAL, THIEVES, LOTS, CASH, KUDOSH, DONATIONS, SALARIES, MIN_GRANT, MAX_GRANT, CURATOR, UNLOCK_K, UNLOCK_ENLIGHTENMENT, UNLOCK_WORKSHOP, UNLOCK_POI, SURVEY_LEVEL",
+                    label="Custom Career Sandbox CONSTRAINT: GOAL, THIEVES, LOTS, CASH $, KUDOSH K, DONATIONS %, SALARIES %, MIN_GRANT $, MAX_GRANT $, CURATOR, UNLOCK_K, UNLOCK_ENLIGHTENMENT, UNLOCK_WORKSHOP, UNLOCK_POI, SURVEY_LEVEL",
                     data={
                         "CONSTRAINT": (self.loan_constraints, 1),
                         "GOAL": (self.sandbox_goal, 1),
                         "THIEVES": (self.thief_threat, 1),
                         "LOTS": (self.lot_status, 1),
-                        "CASH": (self.starting_cash_creative, 1),
-                        "KUDOSH": (self.starting_kudosh_creative, 1),
+                        "CASH": (self.starting_cash_career_formatted, 1),
+                        "KUDOSH": (self.starting_kudosh_career, 1),
                         "DONATIONS": (self.donation_multiplier, 1),
                         "SALARIES": (self.salary_multiplier, 1),
                         "MIN_GRANT": (self.minimum_monthly_grant, 1),
@@ -168,12 +168,12 @@ class TwoPointMuseumGame(Game):
                 weight=4
             ),
             GameObjectiveTemplate(    
-                label="Custom HC Sandbox: GOAL, THIEVES, LOTS, CASH, KUDOSH, DONATIONS, SALARIES, MIN_GRANT, MAX_GRANT, CURATOR, UNLOCK_K, UNLOCK_ENLIGHTENMENT, UNLOCK_WORKSHOP, UNLOCK_FUNFAIR, UNLOCK_POI, SURVEY_LEVEL",
+                label="Custom HC Sandbox: GOAL, THIEVES, LOTS, CASH $, KUDOSH K, DONATIONS %, SALARIES %, MIN_GRANT $, MAX_GRANT $, CURATOR, UNLOCK_K, UNLOCK_ENLIGHTENMENT, UNLOCK_WORKSHOP, UNLOCK_FUNFAIR, UNLOCK_POI, SURVEY_LEVEL",
                 data={
                     "GOAL": (self.sandbox_goal, 1),
                     "THIEVES": (self.thief_threat, 1),
                     "LOTS": (self.lot_status, 1),
-                    "CASH": (self.starting_cash, 1),
+                    "CASH": (self.starting_cash_formatted, 1),
                     "KUDOSH": (self.starting_kudosh, 1),
                     "DONATIONS": (self.donation_multiplier, 1),
                     "SALARIES": (self.salary_multiplier, 1),
@@ -190,12 +190,12 @@ class TwoPointMuseumGame(Game):
                 weight=1
             ),
             GameObjectiveTemplate(    
-                label="Custom Creative Sandbox: GOAL, THIEVES, LOTS, CASH, KUDOSH, DONATIONS, SALARIES, MIN_GRANT, MAX_GRANT, CURATOR, UNLOCK_K, UNLOCK_ENLIGHTENMENT, UNLOCK_WORKSHOP, UNLOCK_FUNFAIR, UNLOCK_POI, SURVEY_LEVEL",
+                label="Custom Creative Sandbox: GOAL, THIEVES, LOTS, CASH $, KUDOSH K, DONATIONS %, SALARIES %, MIN_GRANT $, MAX_GRANT $, CURATOR, UNLOCK_K, UNLOCK_ENLIGHTENMENT, UNLOCK_WORKSHOP, UNLOCK_FUNFAIR, UNLOCK_POI, SURVEY_LEVEL",
                 data={
                     "GOAL": (self.sandbox_goal, 1),
                     "THIEVES": (self.thief_threat, 1),
                     "LOTS": (self.lot_status, 1),
-                    "CASH": (self.starting_cash_creative, 1),
+                    "CASH": (self.starting_cash_creative_formatted, 1),
                     "KUDOSH": (self.starting_kudosh_creative, 1),
                     "DONATIONS": (self.donation_multiplier, 1),
                     "SALARIES": (self.salary_multiplier, 1),
@@ -212,13 +212,13 @@ class TwoPointMuseumGame(Game):
                 weight=1
             ),
             GameObjectiveTemplate(    
-                label="Custom Career Sandbox: GOAL, THIEVES, LOTS, CASH, KUDOSH, DONATIONS, SALARIES, MIN_GRANT, MAX_GRANT, CURATOR, UNLOCK_K, UNLOCK_ENLIGHTENMENT, UNLOCK_WORKSHOP, UNLOCK_FUNFAIR, UNLOCK_POI, SURVEY_LEVEL",
+                label="Custom Career Sandbox: GOAL, THIEVES, LOTS, CASH $, KUDOSH K, DONATIONS %, SALARIES %, MIN_GRANT $, MAX_GRANT $, CURATOR, UNLOCK_K, UNLOCK_ENLIGHTENMENT, UNLOCK_WORKSHOP, UNLOCK_FUNFAIR, UNLOCK_POI, SURVEY_LEVEL",
                 data={
                     "GOAL": (self.sandbox_goal, 1),
                     "THIEVES": (self.thief_threat, 1),
                     "LOTS": (self.lot_status, 1),
-                    "CASH": (self.starting_cash_creative, 1),
-                    "KUDOSH": (self.starting_kudosh_creative, 1),
+                    "CASH": (self.starting_cash_career_formatted, 1),
+                    "KUDOSH": (self.starting_kudosh_career, 1),
                     "DONATIONS": (self.donation_multiplier, 1),
                     "SALARIES": (self.salary_multiplier, 1),
                     "MIN_GRANT": (self.minimum_monthly_grant, 1),
@@ -804,7 +804,7 @@ class TwoPointMuseumGame(Game):
         return range(0, 10000, 1000) 
     def starting_cash_career(self) -> range:
         return range(0, 500000, 50000)   
-    def starting_kudosh(self) -> range:
+    def starting_kudosh_career(self) -> range:
         return range(0, 1000, 100) 
 
     def ferocity_nausea(self) -> range:
@@ -990,6 +990,14 @@ class TwoPointMuseumGame(Game):
         return [
             "without taking a loan", "without going bankrupt", "without taking a loan or going bankrupt"
         ]
+
+    def starting_cash_formatted(self) -> list[str]:
+        return [f"{amount:,}" for amount in self.starting_cash()]
+    def starting_cash_creative_formatted(self) -> list[str]:
+            return [f"{amount:,}" for amount in self.starting_cash_creative()]
+    def starting_cash_career_formatted(self) -> list[str]:
+            return [f"{amount:,}" for amount in self.starting_cash_career()]
+            
 
 
 # Archipelago Options 
