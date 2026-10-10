@@ -168,7 +168,7 @@ class TwoPointMuseumGame(Game):
                 weight=4
             ),
             GameObjectiveTemplate(    
-                label="Custom HC Sandbox: GOAL, THIEVES, LOTS, CASH, KUDOSH, DONATIONS, SALARIES, MIN_GRANT, MAX_GRANT, CURATOR, UNLOCK_K, UNLOCK_ENLIGHTENMENT, UNLOCK_WORKSHOP, UNLOCK_POI, SURVEY_LEVEL",
+                label="Custom HC Sandbox: GOAL, THIEVES, LOTS, CASH, KUDOSH, DONATIONS, SALARIES, MIN_GRANT, MAX_GRANT, CURATOR, UNLOCK_K, UNLOCK_ENLIGHTENMENT, UNLOCK_WORKSHOP, UNLOCK_FUNFAIR, UNLOCK_POI, SURVEY_LEVEL",
                 data={
                     "GOAL": (self.sandbox_goal, 1),
                     "THIEVES": (self.thief_threat, 1),
@@ -183,13 +183,14 @@ class TwoPointMuseumGame(Game):
                     "UNLOCK_K": (self.unlock_kudosh_items, 1),
                     "UNLOCK_ENLIGHTENMENT": (self.unlock_enlightenment_items, 1),
                     "UNLOCK_WORKSHOP": (self.unlock_workshop_contraptions, 1),
+                    "UNLOCK_FUNFAIR": (self.unlock_funfair_blueprints, 1),                    
                     "UNLOCK_POI": (self.unlock_all_pois, 1),
                     "SURVEY_LEVEL": (self.start_max_survey_level, 1),
                 },
                 weight=1
             ),
             GameObjectiveTemplate(    
-                label="Custom Creative Sandbox: GOAL, THIEVES, LOTS, CASH, KUDOSH, DONATIONS, SALARIES, MIN_GRANT, MAX_GRANT, CURATOR, UNLOCK_K, UNLOCK_ENLIGHTENMENT, UNLOCK_WORKSHOP, UNLOCK_POI, SURVEY_LEVEL",
+                label="Custom Creative Sandbox: GOAL, THIEVES, LOTS, CASH, KUDOSH, DONATIONS, SALARIES, MIN_GRANT, MAX_GRANT, CURATOR, UNLOCK_K, UNLOCK_ENLIGHTENMENT, UNLOCK_WORKSHOP, UNLOCK_FUNFAIR, UNLOCK_POI, SURVEY_LEVEL",
                 data={
                     "GOAL": (self.sandbox_goal, 1),
                     "THIEVES": (self.thief_threat, 1),
@@ -204,13 +205,14 @@ class TwoPointMuseumGame(Game):
                     "UNLOCK_K": (self.unlock_kudosh_items, 1),
                     "UNLOCK_ENLIGHTENMENT": (self.unlock_enlightenment_items, 1),
                     "UNLOCK_WORKSHOP": (self.unlock_workshop_contraptions, 1),
+                    "UNLOCK_FUNFAIR": (self.unlock_funfair_blueprints, 1),                    
                     "UNLOCK_POI": (self.unlock_all_pois, 1),
                     "SURVEY_LEVEL": (self.start_max_survey_level, 1),
                 },
                 weight=1
             ),
             GameObjectiveTemplate(    
-                label="Custom Career Sandbox: GOAL, THIEVES, LOTS, CASH, KUDOSH, DONATIONS, SALARIES, MIN_GRANT, MAX_GRANT, CURATOR, UNLOCK_K, UNLOCK_ENLIGHTENMENT, UNLOCK_WORKSHOP, UNLOCK_POI, SURVEY_LEVEL",
+                label="Custom Career Sandbox: GOAL, THIEVES, LOTS, CASH, KUDOSH, DONATIONS, SALARIES, MIN_GRANT, MAX_GRANT, CURATOR, UNLOCK_K, UNLOCK_ENLIGHTENMENT, UNLOCK_WORKSHOP, UNLOCK_FUNFAIR, UNLOCK_POI, SURVEY_LEVEL",
                 data={
                     "GOAL": (self.sandbox_goal, 1),
                     "THIEVES": (self.thief_threat, 1),
@@ -225,6 +227,7 @@ class TwoPointMuseumGame(Game):
                     "UNLOCK_K": (self.unlock_kudosh_items, 1),
                     "UNLOCK_ENLIGHTENMENT": (self.unlock_enlightenment_items, 1),
                     "UNLOCK_WORKSHOP": (self.unlock_workshop_contraptions, 1),
+                    "UNLOCK_FUNFAIR": (self.unlock_funfair_blueprints, 1),
                     "UNLOCK_POI": (self.unlock_all_pois, 1),
                     "SURVEY_LEVEL": (self.start_max_survey_level, 1),
                 },
@@ -835,6 +838,9 @@ class TwoPointMuseumGame(Game):
         return ["Off", "On"]
     @staticmethod
     def unlock_workshop_contraptions() -> List[str]:
+        return ["Off", "On"]
+    @staticmethod
+    def unlock_funfair_blueprints() -> List[str]:
         return ["Off", "On"]
     @staticmethod
     def unlock_all_pois() -> List[str]:
