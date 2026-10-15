@@ -235,7 +235,8 @@ The implementation is centered around generic museum progression and sandbox cha
 __Recommended Custom Rules:__
 Popup Museum badges only can be earned in Campaign mode.
 When using the optional constraints, if curator level is needed and the setting doesn't have the curator level constraints enabled, take the second number in the stars counter (the total number of stars across all museums) instead. 
-When the objective is to display all items within one category, use the sticker album for the category. If you want an extra challenge, look for secret items within the category on the Wiki, many Digiverse exhibits are not shown as silhuettes in the sticker album.  
+When the objective is to display all items within one category, use the sticker album for the category. If you want an extra challenge, look for secret items within the category on the Wiki, many Digiverse exhibits are not shown as silhuettes in the sticker album. 
+If all enlightenment items are unlocked, use Max + Required Enlightenment (for example Prehistory goes to 50, if everything is unlocked and something is analyzed for extra knowledge, it goes to 51, 52, ...) This might be bugged though, so it can appear as the multiple of the maximum. It's still possible to calculate the enlightenment level.
 
 #### Objectives
 1. Museum Progression

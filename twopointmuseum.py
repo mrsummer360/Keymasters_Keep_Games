@@ -341,13 +341,41 @@ class TwoPointMuseumGame(Game):
                 weight=6,
             ),
             GameObjectiveTemplate(
-                            label="Get all guest stickers",
+                            label="Get STICKERS guest stickers",
                             data={
+                                "STICKERS": (self.number_stickers_guests, 1)
                             },
                             is_time_consuming=False,
                             is_difficult=False,
                             weight=6,
             ),
+            GameObjectiveTemplate(
+                            label="Get STICKERS golden guest stickers",
+                            data={
+                                "STICKERS": (self.number_stickers_guests, 1)
+                            },
+                            is_time_consuming=False,
+                            is_difficult=False,
+                            weight=6,
+            ),
+            GameObjectiveTemplate(
+                            label="Get STICKERS feature stickers",
+                            data={
+                                "STICKERS": (self.number_stickers_features, 1)
+                            },
+                            is_time_consuming=False,
+                            is_difficult=False,
+                            weight=6,
+            ),            
+            GameObjectiveTemplate(
+                            label="Get STICKERS golden feature stickers",
+                            data={
+                                "STICKERS": (self.number_stickers_features(), 1)
+                            },
+                            is_time_consuming=False,
+                            is_difficult=False,
+                            weight=6,
+            ),            
         ])
 
         # Sandbox Goals
@@ -776,6 +804,13 @@ class TwoPointMuseumGame(Game):
         return range(1, 20, 1)    
     def number_poi_gearbox_fairground(self) -> range:
         return range(1, 26, 1)        
+
+    def number_stickers_guests(self) -> range:
+        return range(1, 26, 1)
+    def number_stickers_features(self) -> range:
+        return range(1, 57, 1)
+    
+        
 
     def enlightenment_prehistory(self) -> range:
             return range(1, 50, 1)
