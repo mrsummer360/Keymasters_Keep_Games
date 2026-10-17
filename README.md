@@ -10,6 +10,30 @@ mrsummer360's game implementations for [Keymaster's Keep](https://github.com/Ser
 5. Restart the Archipelago Launcher and open 'Generate Template Options'. The `Players/Templates/Keymaster's Keep.yaml` file will now contain the customisable settings for each implementation installed.
 
 ## KMK Codex Entries
+
+### Dynasty Warriors 3
+__Version:__ 1.0
+
+__Download:__ [LINK](https://github.com/mrsummer360/Keymasters_Keep_Games/blob/main/DW3.py)
+
+__Description:__
+Dynasty Warriors 3 is a hack-and-slash action game set during the Three Kingdoms period of Chinese history. Players choose a general and fight through large battles, defeating enemy officers and forces. Xtreme Legends expands the game with additional Musou Mode characters and stages.
+
+__KMK Implementation:__
+Objectives cover playing as generals in Musou Mode or Free Play, with Free Play objectives also selecting a stage. Some objectives set a minimum difficulty. Xtreme Legends objectives and its unique items are included when the expansion option is enabled; unique-item objectives can also be enabled separately.
+The implementation was made with the PS2 version in mind, should be compatible with the remastered version though. 
+
+__Recommended Custom Rules:__
+Enable the Xtreme Legends option only if you have access to the expansion. Complete each objective using the specified general, mode, and stage; difficulty objectives mean that difficulty or higher.
+
+#### Objectives
+1. Musou Mode
+    - Play as GENERAL in Musou Mode, optionally on a specified minimum difficulty
+2. Free Play Mode
+    - Play as GENERAL on STAGE, optionally on a specified minimum difficulty
+3. Unique Items
+    - Obtain UNIQUE (base game or Xtreme Legends)
+
 ### No Man's Sky
 __Version:__ 1.0  
 
@@ -222,7 +246,7 @@ The Optional Challenges are tied to Sandbox mode and are therefore only availabl
  - Use a specific Sandbox mode custom setting (includes all of the settings above)
 
 ### Two Point Museum
-__Version:__ 1.2
+__Version:__ 1.4
 
 __Download:__ [LINK](https://github.com/mrsummer360/Keymasters_Keep_Games/blob/main/twopointmuseum.py)
 
@@ -251,6 +275,9 @@ If all enlightenment items are unlocked, use Max + Required Enlightenment (for e
    - Display all SUBTHEME exhibits in one museum
 5. Stars
    - Get STARS Stars in MAP
+6. Art
+   - Create ARTWORK of QUALITY quality
+    - Create ARTWORK made out of MATERIAL of QUALITY quality
 
 
 
